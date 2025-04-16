@@ -103,6 +103,9 @@ def populate_data_and_cache(neo4j: Neo4j) -> dict:
 
     neo4j.compute_common_cache(requests_results)
 
+    with open("llm_assets/requests_results.json", "w") as f:
+        json.dump(neo4j.all_requests, f, indent=4)
+
     return requests_results
 
 

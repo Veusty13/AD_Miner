@@ -16,7 +16,7 @@ class privileged_accounts_outside_Protected_Users(Control):
         self.category = "permissions"
         self.control_key = "privileged_accounts_outside_Protected_Users"
 
-        self.title = "Privileged account outside the protected users group."
+        self.title = "Privileged account outside the protected users group"
         self.description = (
             "Privileged accounts not protected by the Protected Users group."
         )
