@@ -46,6 +46,29 @@ def handler(signum, frame):
 signal.signal(signal.SIGINT, handler)
 
 
+def serialize_entire_dict(data):
+    def serialize(obj):
+        if isinstance(obj, dict):
+            return {k: serialize(v) for k, v in obj.items()}
+        elif isinstance(obj, list):
+            return [serialize(v) for v in obj]
+        elif hasattr(obj, '__dict__'):
+            cls_name = obj.__class__.__name__
+            attrs = {
+                k: serialize(v)
+                for k, v in vars(obj).items()
+                if k not in {"output_type", "postProcessing"}
+            }
+            return {"__class__": cls_name, **attrs}
+        else:
+            return obj  # str, int, float, None, bool etc.
+    return serialize(data)
+
+
+def remove_fields(data):
+    return {k: {x: y for x, y in v.items() if x not in ["output_type", "postProcessing"]} for k, v in data.items()}
+
+
 # Do all the requests (if cached, retrieve from cache, else store in cache)
 def populate_data_and_cache(neo4j: Neo4j) -> dict:
     """Populate data and cache it based on configuration settings.
@@ -103,8 +126,6 @@ def populate_data_and_cache(neo4j: Neo4j) -> dict:
 
     neo4j.compute_common_cache(requests_results)
 
-    with open("llm_assets/requests_results.json", "w") as f:
-        json.dump(neo4j.all_requests, f, indent=4)
 
     return requests_results
 
@@ -213,6 +234,9 @@ def main() -> None:
         neo4j.verify_integrity(neo4j)
 
     requests_results = populate_data_and_cache(neo4j)
+
+    with open("llm_assets/requests_results.json", "w") as f:
+        json.dump(serialize_entire_dict(remove_fields(neo4j.all_requests)), f, indent=4)
 
     # Define legacy dicts
     dico_name_description = {}

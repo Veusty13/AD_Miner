@@ -31,7 +31,11 @@
           "Grid": "class Grid:\n    def __init__(self, title, template=\"grid\", classes=\"thead-light\"):\n        self.template_base_path = HTML_DIRECTORY / \"components/grid/\"\n        self.title = title\n        self.template = template\n        self.headers = []\n        self.data = \"\"\n        self.class_css = classes\n\n    def addheader(self, header):\n        self.headers.append(header)\n\n    def setheaders(self, header):\n        self.headers = header\n\n    def getHeaders(self):\n        return self.headers\n\n    def setData(self, data):\n        self.data = data\n\n    def render(self, page_f):\n        with open(self.template_base_path / (self.template + \"_template.html\"), \"r\") as grid_template:\n            # Grid data that will be inserted in the template\n            textToInsert = \"var columnDefs = [\"\n            for header in self.headers:\n                textToInsert += \"\"\"{\n                    field:\\\"%s\\\",\n                    cellRenderer: function(params) {\n                        if (typeof params.data[params.column.colId] === 'object') {\n                            if (params.data[params.column.colId].value == \\\"0\\\") {\n                                return params.data[params.column.colId].value;\n                            }\n                            if (params.data[params.column.colId].link == 'FALSE_LINK') {\n                                params.data[params.column.colId] = '<p>' + params.data[params.column.colId].value + '</p>';\n                                return params.data[params.column.colId];\n                            }\n                            if (params.data[params.column.colId].link != null) {\n                                if (params.data[params.column.colId].before_link != null) {\n                                    var prepend = params.data[params.column.colId].before_link;\n                                }\n                                else {\n                                    var prepend = \"\";\n                                }\n                                params.data[params.column.colId] = prepend + '<a onMouseOver=\"this.style.color=#99c3ff\" onMouseOut=\"this.style.color=#000\" href=\"' + params.data[params.column.colId].link + '\">'+ params.data[params.column.colId].value + '</a>';\n                                return params.data[params.column.colId];\n                            }\n                            return params.data[params.column.colId];\n                        }\n                        else {\n                            return params.value;\n                        }\n                    },\n                },\"\"\" % (\n                    header\n                )\n\n            textToInsert = textToInsert + \"];\\nvar rowData=%s;\\n\" % (self.data)\n\n            template_contents = grid_template.read()\n\n            new_contents = template_contents.replace(\"// DATA PLACEHOLDER\", textToInsert)\n\n            page_f.write(new_contents)"
         }
       }
-    }
+    },
+    "requests_keys": [
+      "nb_domain_admins",
+      "unpriviledged_users_with_admincount"
+    ]
   },
   {
     "title": "Paths to Domain Admins",
@@ -94,7 +98,17 @@
         ],
         "code_map": {}
       }
-    }
+    },
+    "requests_keys": [
+      "objects_to_domain_admin",
+      "objects_to_domain_admin",
+      "users_to_domain_admin",
+      "groups_to_domain_admin",
+      "computers_to_domain_admin",
+      "domains_to_domain_admin",
+      "domains",
+      "nb_domain_collected"
+    ]
   },
   {
     "title": "Inadequate access to DCSync privileges",
@@ -158,7 +172,14 @@
         ],
         "code_map": {}
       }
-    }
+    },
+    "requests_keys": [
+      "objects_to_dcsync",
+      "dcsync_list",
+      "nb_domain_admins",
+      "set_dcsync1",
+      "set_dcsync2"
+    ]
   },
   {
     "title": "Computers admin of other computers",
@@ -219,7 +240,10 @@
         ],
         "code_map": {}
       }
-    }
+    },
+    "requests_keys": [
+      "computers_admin_on_computers"
+    ]
   },
   {
     "title": "Dormant accounts",
@@ -269,7 +293,12 @@
           "percentage_superior": "def percentage_superior(req, base, criticity=1, percentage=0, presence=False):\n    if req is None:\n        return -1\n    if base is None:\n        return -1\n    if len(base) == 0:\n        return -1\n\n    if len(base) and len(req) / len(base) > percentage:\n        return criticity\n\n    if presence:\n        if len(req) > 0:\n            return criticity + 1\n    return 5"
         }
       }
-    }
+    },
+    "requests_keys": [
+      "nb_enabled_accounts",
+      "dormant_accounts",
+      "admin_list"
+    ]
   },
   {
     "title": "Users without password expiration",
@@ -319,7 +348,12 @@
           "percentage_superior": "def percentage_superior(req, base, criticity=1, percentage=0, presence=False):\n    if req is None:\n        return -1\n    if base is None:\n        return -1\n    if len(base) == 0:\n        return -1\n\n    if len(base) and len(req) / len(base) > percentage:\n        return criticity\n\n    if presence:\n        if len(req) > 0:\n            return criticity + 1\n    return 5"
         }
       }
-    }
+    },
+    "requests_keys": [
+      "user_password_never_expires",
+      "nb_enabled_accounts",
+      "nb_domain_admins"
+    ]
   },
   {
     "title": "Paths to Operators Groups",
@@ -383,7 +417,11 @@
         ],
         "code_map": {}
       }
-    }
+    },
+    "requests_keys": [
+      "objects_to_operators_member",
+      "objects_to_operators_groups"
+    ]
   },
   {
     "title": "Tier-0 violation (sessions)",
@@ -440,7 +478,16 @@
         ],
         "code_map": {}
       }
-    }
+    },
+    "requests_keys": [
+      "dom_admin_on_non_dc",
+      "dico_ghost_computer",
+      "dico_ghost_user",
+      "dico_dc_computer",
+      "dico_user_da",
+      "dico_da_group",
+      "dico_is_kerberoastable"
+    ]
   },
   {
     "title": "Shadow Credentials on regular accounts",
@@ -504,7 +551,10 @@
         ],
         "code_map": {}
       }
-    }
+    },
+    "requests_keys": [
+      "users_shadow_credentials_to_non_admins"
+    ]
   },
   {
     "title": "Inadequate GPO modifications privileges",
@@ -577,7 +627,17 @@
         ],
         "code_map": {}
       }
-    }
+    },
+    "requests_keys": [
+      "users_admin_on_computers",
+      "admin_list",
+      "unpriv_users_to_GPO_init",
+      "unpriv_users_to_GPO_user_enforced",
+      "unpriv_users_to_GPO_computer_not_enforced",
+      "unpriv_users_to_GPO_user_not_enforced",
+      "unpriv_users_to_GPO_computer_not_enforced",
+      "unpriv_users_to_GPO"
+    ]
   },
   {
     "title": "Unexpected PrimaryGroupID",
@@ -619,13 +679,16 @@
           "MODULES_DIRECTORY": "MODULES_DIRECTORY = Path(__file__).parent"
         }
       }
-    }
+    },
+    "requests_keys": [
+      "primaryGroupID_lower_than_1000"
+    ]
   },
   {
     "title": "Old KRBTGT password",
     "file_name": "krb_last_change.py",
     "control_category": "Kerberos",
-    "code": "from ad_miner.sources.modules.controls import Control\nfrom ad_miner.sources.modules.controls import register_control\n\nfrom ad_miner.sources.modules.page_class import Page\nfrom ad_miner.sources.modules.grid_class import Grid\nfrom ad_miner.sources.modules.utils import days_format\nfrom ad_miner.sources.modules.common_analysis import time_since\n\n\n@register_control\nclass krb_last_change(Control):  # TODO change the class name\n    \"Docstring of my control\"  # TODO small documentation here\n\n    def __init__(self, arguments, requests_results) -> None:\n        super().__init__(arguments, requests_results)\n\n        self.azure_or_onprem = \"on_premise\"\n        self.category = \"kerberos\"\n        self.control_key = \"krb_last_change\"\n\n        self.title = \"Old KRBTGT password\"\n        self.description = \"Last change of password for KRBTGT account.\"\n        self.risk = \"The more regularly these passwords are changed, the better. If KRBTGT account is compromised, the whole infrastructure is as well.\"\n        self.poa = \"Check that KRBTGT accounts had their passwords changed recently.\"\n\n        self.users_krb_pwd_last_set = requests_results[\"krb_pwd_last_change\"]\n\n    def run(self):\n        if self.users_krb_pwd_last_set is None:\n            return\n        page = Page(\n            self.arguments.cache_prefix,\n            \"krb_last_change\",\n            \"KRBTGT account\",\n            self.get_dico_description(),\n        )\n        grid = Grid(\"KRBTGT account\")\n        grid.setheaders(\n            [\"domain\", \"name\", \"Last password change\", \"Account Creation Date\"]\n        )\n\n        data = []\n        for dict in self.users_krb_pwd_last_set:\n            tmp_data = {\"domain\": '<i class=\"bi bi-globe2\"></i> ' + dict[\"domain\"]}\n            tmp_data[\"name\"] = (\n                '<i class=\"bi bi-ticket-perforated-fill\"></i> ' + dict[\"name\"]\n            )\n            tmp_data[\"Last password change\"] = days_format(dict[\"pass_last_change\"])\n            tmp_data[\"Account Creation Date\"] = days_format(dict[\"accountCreationDate\"])\n            data.append(tmp_data)\n\n        grid.setData(data)\n        page.addComponent(grid)\n        page.render()\n\n        self.data = max(\n            [dict[\"pass_last_change\"] for dict in self.users_krb_pwd_last_set],\n            default=0,\n        )\n\n        self.name_description = f\"krbtgt not updated in > {self.data} days\"\n\n    def get_rating(self) -> int:\n        return time_since(\n            max(\n                [dict[\"pass_last_change\"] for dict in self.users_krb_pwd_last_set],\n                default=None,\n            ),\n            age=1 * 365,\n            criticity=2,\n        )",
+    "code": "from ad_miner.sources.modules.controls import Control\nfrom ad_miner.sources.modules.controls import register_control\n\nfrom ad_miner.sources.modules.page_class import Page\nfrom ad_miner.sources.modules.grid_class import Grid\nfrom ad_miner.sources.modules.utils import days_format\nfrom ad_miner.sources.modules.common_analysis import time_since\n\n\n@register_control\nclass krb_last_change(Control):  # TODO change the class name\n    \"Docstring of my control\"  # TODO small documentation here\n\n    def __init__(self, arguments, requests_results) -> None:\n        super().__init__(arguments, requests_results)\n\n        self.azure_or_onprem = \"on_premise\"\n        self.category = \"kerberos\"\n        self.control_key = \"krb_last_change\"\n\n        self.title = \"Old KRBTGT password\"\n        self.description = \"Last change of password for KRBTGT account.\"\n        self.risk = \"The more regularly these passwords are changed, the better. If KRBTGT account is compromised, the whole infrastructure is as well.\"\n        self.poa = \"Check that KRBTGT accounts had their passwords changed recently.\"\n\n        self.users_krb_pwd_last_set = requests_results[\"krb_pwd_last_change\"]\n\n    def run(self):\n        if self.users_krb_pwd_last_set is None:\n            return\n        page = Page(\n            self.arguments.cache_prefix,\n            \"krb_last_change\",\n            \"KRBTGT account\",\n            self.get_dico_description(),\n        )\n        grid = Grid(\"KRBTGT account\")\n        grid.setheaders(\n            [\"domain\", \"name\", \"Last password change\", \"Account Creation Date\"]\n        )\n\n        data = []\n        for dict in self.users_krb_pwd_last_set:\n            tmp_data = {\"domain\": '<i class=\"bi bi-globe2\"></i> ' + dict[\"domain\"]}\n            tmp_data[\"name\"] = (\n                '<i class=\"bi bi-ticket-perforated-fill\"></i> ' + dict[\"name\"]\n            )\n            tmp_data[\"Last password change\"] = days_format(dict[\"pass_last_change\"])\n            tmp_data[\"Account Creation Date\"] = days_format(dict[\"accountCreationDate\"])\n            data.append(tmp_data)\n\n        grid.setData(data)\n        page.addComponent(grid)\n        page.render()\n\n        self.data = max(\n            [dict[\"pass_last_change\"] for dict in self.users_krb_pwd_last_set],\n            default=0,\n        )\n\n        self.name_description = f\"krbtgt not updated in > {self.data} days\"\n\n    def get_rating(self) -> int:\n        return time_since(\n            max(\n                [dict[\"pass_last_change\"] for dict in self.users_krb_pwd_last_set],\n                default=None,\n            ),\n            age=1 * 365,\n            criticity=2,\n        )\n",
     "dependencies": {
       "/home/srassinot/repo/AD_Miner/ad_miner/sources/modules/controls/__init__.py": {
         "imported_elements": [
@@ -669,7 +732,10 @@
           "time_since": "def time_since(req, age=90, criticity=1):  # req as days\n    if req is None:\n        return -1\n    if req > age:\n        return criticity\n\n    return 5"
         }
       }
-    }
+    },
+    "requests_keys": [
+      "krb_pwd_last_change"
+    ]
   },
   {
     "title": "Users that have powerful cross-domain privileges",
@@ -719,7 +785,17 @@
           "createGraphPage": "def createGraphPage(\n    render_prefix, page_name, page_title, page_description, graph_data, requests_results\n):\n    page = Page(render_prefix, page_name, page_title, page_description)\n    graph = Graph()\n    graph.setPaths(graph_data)\n\n    graph.addGhostComputers(requests_results[\"dico_ghost_computer\"])\n    graph.addGhostUsers(requests_results[\"dico_ghost_user\"])\n    graph.addDCComputers(requests_results[\"dico_dc_computer\"])\n    graph.addUserDA(requests_results[\"dico_user_da\"])\n    graph.addGroupDA(requests_results[\"dico_da_group\"])\n    graph.addKerberoastableUsers(requests_results[\"dico_is_kerberoastable\"])\n\n    page.addComponent(graph)\n    page.render()"
         }
       }
-    }
+    },
+    "requests_keys": [
+      "cross_domain_local_admins",
+      "cross_domain_domain_admins",
+      "dico_ghost_computer",
+      "dico_ghost_user",
+      "dico_dc_computer",
+      "dico_user_da",
+      "dico_da_group",
+      "dico_is_kerberoastable"
+    ]
   },
   {
     "title": "Inadequate number of domain admins",
@@ -761,7 +837,10 @@
           "presence_of": "def presence_of(req, criticity=1, threshold=0):\n    if req is None:\n        return -1\n    if len(req) > threshold:\n        return criticity\n    return 5"
         }
       }
-    }
+    },
+    "requests_keys": [
+      "nb_domain_admins"
+    ]
   },
   {
     "title": "Users with old passwords",
@@ -811,7 +890,12 @@
           "percentage_superior": "def percentage_superior(req, base, criticity=1, percentage=0, presence=False):\n    if req is None:\n        return -1\n    if base is None:\n        return -1\n    if len(base) == 0:\n        return -1\n\n    if len(base) and len(req) / len(base) > percentage:\n        return criticity\n\n    if presence:\n        if len(req) > 0:\n            return criticity + 1\n    return 5"
         }
       }
-    }
+    },
+    "requests_keys": [
+      "password_last_change",
+      "nb_domain_admins",
+      "nb_enabled_accounts"
+    ]
   },
   {
     "title": "Objects with SID history",
@@ -866,7 +950,11 @@
         ],
         "code_map": {}
       }
-    }
+    },
+    "requests_keys": [
+      "has_sid_history",
+      "users_admin_on_computers"
+    ]
   },
   {
     "title": "Objects can read GMSA passwords of administrators",
@@ -930,7 +1018,10 @@
         ],
         "code_map": {}
       }
-    }
+    },
+    "requests_keys": [
+      "can_read_gmsapassword_of_adm"
+    ]
   },
   {
     "title": "Users with cleartext passwords",
@@ -972,7 +1063,10 @@
           "containsDAs": "def containsDAs(req, criticity=1):\n    if req is None:\n        return -1\n\n    for object in req:\n        if object.get(\"is_Domain_Admin\"):\n            if object[\"is_Domain_Admin\"] == True:\n                return criticity\n        # if object.get(\"is_da\"):\n        #     if object[\"is_da\"] == True:\n        #         return criticity\n\n    if len(req) > 0:\n        return criticity + 1\n\n    return 5"
         }
       }
-    }
+    },
+    "requests_keys": [
+      "nb_user_password_cleartext"
+    ]
   },
   {
     "title": "Kerberos unconstrained delegations",
@@ -1051,7 +1145,10 @@
         ],
         "code_map": {}
       }
-    }
+    },
+    "requests_keys": [
+      "kud"
+    ]
   },
   {
     "title": "Users with local admin privileges",
@@ -1142,7 +1239,23 @@
         ],
         "code_map": {}
       }
-    }
+    },
+    "requests_keys": [
+      "users_admin_on_computers",
+      "nb_kerberoastable_accounts",
+      "password_last_change",
+      "get_users_linked_admin_group",
+      "get_groups_linked_admin_group",
+      "get_computers_linked_admin_group",
+      "get_users_direct_admin",
+      "admin_list",
+      "nb_enabled_accounts",
+      "dico_ghost_computer",
+      "dico_ghost_user",
+      "dico_dc_computer",
+      "dico_user_da",
+      "dico_da_group"
+    ]
   },
   {
     "title": "ACL anomalies",
@@ -1209,7 +1322,22 @@
         ],
         "code_map": {}
       }
-    }
+    },
+    "requests_keys": [
+      "anomaly_acl_1",
+      "anomaly_acl_2",
+      "users_admin_on_computers",
+      "dico_is_user_admin_on_computer",
+      "dico_paths_computers_to_DA",
+      "admin_list",
+      "dico_users_to_da",
+      "dico_computers_to_da",
+      "dico_groups_to_da",
+      "dico_ou_to_da",
+      "dico_gpo_to_da",
+      "domains_to_domain_admin",
+      "computers_admin_on_computers"
+    ]
   },
   {
     "title": "Paths to Organizational Units (OU)",
@@ -1277,7 +1405,13 @@
         ],
         "code_map": {}
       }
-    }
+    },
+    "requests_keys": [
+      "compromise_paths_of_OUs",
+      "vulnerable_OU_impact",
+      "set_containsda",
+      "set_containsdc"
+    ]
   },
   {
     "title": "Privileged account outside the protected users group",
@@ -1319,7 +1453,10 @@
           "presence_of": "def presence_of(req, criticity=1, threshold=0):\n    if req is None:\n        return -1\n    if len(req) > threshold:\n        return criticity\n    return 5"
         }
       }
-    }
+    },
+    "requests_keys": [
+      "nb_domain_admins"
+    ]
   },
   {
     "title": "Guest accounts",
@@ -1361,7 +1498,10 @@
           "presence_of": "def presence_of(req, criticity=1, threshold=0):\n    if req is None:\n        return -1\n    if len(req) > threshold:\n        return criticity\n    return 5"
         }
       }
-    }
+    },
+    "requests_keys": [
+      "guest_accounts"
+    ]
   },
   {
     "title": "Attack paths choke points",
@@ -1411,7 +1551,12 @@
           "grid_data_stringify": "def grid_data_stringify(raw_data: dict) -> str:\n    \"\"\"\n    Transform a dict to a string for the grid formating. This is a dumb fix for the sorting with hyperlink.\n    dict format :\n    {\n        \"link\",\n        \"value\",\n        \"before_link\"\n    }\n    \"\"\"\n    link = raw_data['link'].replace(sep, '_').replace('/', '_')\n    try:\n        return f\"{raw_data['before_link']} <a class=\\\"grid-link\\\" href='{link}'>{raw_data['value']}&nbsp;<i class='bi bi-box-arrow-up-right' style='color: #0969da;'></i></a>\"\n    except KeyError:\n        return f\"<a class=\\\"grid-link\\\" href='{link}'>{raw_data['value']}&nbsp;<i class='bi bi-box-arrow-up-right' style='color: #0969da;'></i></a>\""
         }
       }
-    }
+    },
+    "requests_keys": [
+      "objects_to_domain_admin",
+      "objects_to_dcsync",
+      "da_to_da"
+    ]
   },
   {
     "title": "Kerberos constrained delegation",
@@ -1459,7 +1604,10 @@
           "parseConstrainedData": "def parseConstrainedData(list_of_dict):\n    final_dict = {}\n    for dict in list_of_dict:\n        if dict[\"name\"] in final_dict.keys():\n            final_dict[dict[\"name\"]] += [dict[\"computer\"]]\n        else:\n            final_dict[dict[\"name\"]] = [dict[\"computer\"]]\n    return final_dict"
         }
       }
-    }
+    },
+    "requests_keys": [
+      "users_constrained_delegations"
+    ]
   },
   {
     "title": "RDP access (computers)",
@@ -1515,7 +1663,11 @@
         ],
         "code_map": {}
       }
-    }
+    },
+    "requests_keys": [
+      "rdp_access",
+      "nb_enabled_accounts"
+    ]
   },
   {
     "title": "Paths to DNS Admins",
@@ -1542,7 +1694,10 @@
           "presence_of": "def presence_of(req, criticity=1, threshold=0):\n    if req is None:\n        return -1\n    if len(req) > threshold:\n        return criticity\n    return 5"
         }
       }
-    }
+    },
+    "requests_keys": [
+      "unpriv_to_dnsadmins"
+    ]
   },
   {
     "title": "Computers with obsolete OS",
@@ -1593,7 +1748,10 @@
           "manageComputersOs": "def manageComputersOs(computer_list):\n    if computer_list is None:\n        return None\n    all_os = {}\n    computers_os_obsolete = []\n\n    for line in computer_list:\n        os = line[\"os\"]\n        if \"windows\" in os.lower():\n            os = os.lower()\n            os = os.replace(\"\\xa0\", \" \")\n            os = os.replace(\"®\", \"\")\n            os = os.replace(\" server\", \"\")\n            os = os.replace(\" storage\", \"\")\n            os = os.replace(\" 2008 r2\", \" 2008R2\")\n            os = os.replace(\" 2012 r2\", \" 2012R2\")\n            ver = re.match(r\"^windows ([.a-zA-Z0-9]+)\\s\", os, re.M | re.I)\n            if ver:\n                os = \"Windows \" + ver.group(1).upper()\n            else:\n                os = os.replace(\"windows\", \"Windows\")\n        else:\n            os = os\n\n        # Cleaner way to do a try/except for dictionaries is to use get() :\n        lastLogon = line.get(\"lastLogon\", \"Not specified\")\n        final_line = {\n            \"Domain\": line[\"domain\"],\n            \"name\": line[\"name\"],\n            \"Operating system\": os,\n            \"Last logon in days\": lastLogon,\n        }\n\n        # Stats for OS repartition\n        def addToOS(key):\n            if all_os.get(key):\n                all_os[key] += 1\n            else:\n                all_os[key] = 1\n\n        if \"windows\" in os.lower():\n            addToOS(os)\n        elif \"linux\" in os.lower() or \"ubuntu\" in os.lower():\n            addToOS(\"Linux\")\n        elif \"mac\" in os.lower():\n            addToOS(\"MacOS\")\n        elif \"android\" in os.lower():\n            addToOS(\"Android\")\n        elif \"ios\" in os.lower():\n            addToOS(\"iOS\")\n        else:\n            addToOS(\"Other\")\n\n        if os in obsolete_os_list:\n            computers_os_obsolete.append(final_line)\n    return computers_os_obsolete, all_os"
         }
       }
-    }
+    },
+    "requests_keys": [
+      "os"
+    ]
   },
   {
     "title": "Groups without any member",
@@ -1627,7 +1785,11 @@
           "Grid": "class Grid:\n    def __init__(self, title, template=\"grid\", classes=\"thead-light\"):\n        self.template_base_path = HTML_DIRECTORY / \"components/grid/\"\n        self.title = title\n        self.template = template\n        self.headers = []\n        self.data = \"\"\n        self.class_css = classes\n\n    def addheader(self, header):\n        self.headers.append(header)\n\n    def setheaders(self, header):\n        self.headers = header\n\n    def getHeaders(self):\n        return self.headers\n\n    def setData(self, data):\n        self.data = data\n\n    def render(self, page_f):\n        with open(self.template_base_path / (self.template + \"_template.html\"), \"r\") as grid_template:\n            # Grid data that will be inserted in the template\n            textToInsert = \"var columnDefs = [\"\n            for header in self.headers:\n                textToInsert += \"\"\"{\n                    field:\\\"%s\\\",\n                    cellRenderer: function(params) {\n                        if (typeof params.data[params.column.colId] === 'object') {\n                            if (params.data[params.column.colId].value == \\\"0\\\") {\n                                return params.data[params.column.colId].value;\n                            }\n                            if (params.data[params.column.colId].link == 'FALSE_LINK') {\n                                params.data[params.column.colId] = '<p>' + params.data[params.column.colId].value + '</p>';\n                                return params.data[params.column.colId];\n                            }\n                            if (params.data[params.column.colId].link != null) {\n                                if (params.data[params.column.colId].before_link != null) {\n                                    var prepend = params.data[params.column.colId].before_link;\n                                }\n                                else {\n                                    var prepend = \"\";\n                                }\n                                params.data[params.column.colId] = prepend + '<a onMouseOver=\"this.style.color=#99c3ff\" onMouseOut=\"this.style.color=#000\" href=\"' + params.data[params.column.colId].link + '\">'+ params.data[params.column.colId].value + '</a>';\n                                return params.data[params.column.colId];\n                            }\n                            return params.data[params.column.colId];\n                        }\n                        else {\n                            return params.value;\n                        }\n                    },\n                },\"\"\" % (\n                    header\n                )\n\n            textToInsert = textToInsert + \"];\\nvar rowData=%s;\\n\" % (self.data)\n\n            template_contents = grid_template.read()\n\n            new_contents = template_contents.replace(\"// DATA PLACEHOLDER\", textToInsert)\n\n            page_f.write(new_contents)"
         }
       }
-    }
+    },
+    "requests_keys": [
+      "get_empty_groups",
+      "nb_groups"
+    ]
   },
   {
     "title": "AS-REP Roastable accounts",
@@ -1669,7 +1831,10 @@
           "containsDAs": "def containsDAs(req, criticity=1):\n    if req is None:\n        return -1\n\n    for object in req:\n        if object.get(\"is_Domain_Admin\"):\n            if object[\"is_Domain_Admin\"] == True:\n                return criticity\n        # if object.get(\"is_da\"):\n        #     if object[\"is_da\"] == True:\n        #         return criticity\n\n    if len(req) > 0:\n        return criticity + 1\n\n    return 5"
         }
       }
-    }
+    },
+    "requests_keys": [
+      "nb_as-rep_roastable_accounts"
+    ]
   },
   {
     "title": "Paths to the AdminSDHolder container",
@@ -1696,7 +1861,10 @@
           "presence_of": "def presence_of(req, criticity=1, threshold=0):\n    if req is None:\n        return -1\n    if len(req) > threshold:\n        return criticity\n    return 5"
         }
       }
-    }
+    },
+    "requests_keys": [
+      "vuln_permissions_adminsdholder"
+    ]
   },
   {
     "title": "Password requirement bypass",
@@ -1746,7 +1914,10 @@
           "presence_of": "def presence_of(req, criticity=1, threshold=0):\n    if req is None:\n        return -1\n    if len(req) > threshold:\n        return criticity\n    return 5"
         }
       }
-    }
+    },
+    "requests_keys": [
+      "get_users_password_not_required"
+    ]
   },
   {
     "title": "Non-tier 0 local admin privs on ADCS",
@@ -1810,7 +1981,10 @@
         ],
         "code_map": {}
       }
-    }
+    },
+    "requests_keys": [
+      "objects_to_adcs"
+    ]
   },
   {
     "title": "Kerberos RBCD against computers",
@@ -1879,7 +2053,11 @@
         ],
         "code_map": {}
       }
-    }
+    },
+    "requests_keys": [
+      "graph_rbcd",
+      "graph_rbcd_to_da"
+    ]
   },
   {
     "title": "Cross-domain paths to Domain Admin",
@@ -1943,7 +2121,11 @@
         ],
         "code_map": {}
       }
-    }
+    },
+    "requests_keys": [
+      "da_to_da",
+      "nb_domain_collected"
+    ]
   },
   {
     "title": "Shadow Credentials on privileged accounts",
@@ -2007,7 +2189,10 @@
         ],
         "code_map": {}
       }
-    }
+    },
+    "requests_keys": [
+      "users_shadow_credentials"
+    ]
   },
   {
     "title": "Users FGPP",
@@ -2041,7 +2226,10 @@
           "Grid": "class Grid:\n    def __init__(self, title, template=\"grid\", classes=\"thead-light\"):\n        self.template_base_path = HTML_DIRECTORY / \"components/grid/\"\n        self.title = title\n        self.template = template\n        self.headers = []\n        self.data = \"\"\n        self.class_css = classes\n\n    def addheader(self, header):\n        self.headers.append(header)\n\n    def setheaders(self, header):\n        self.headers = header\n\n    def getHeaders(self):\n        return self.headers\n\n    def setData(self, data):\n        self.data = data\n\n    def render(self, page_f):\n        with open(self.template_base_path / (self.template + \"_template.html\"), \"r\") as grid_template:\n            # Grid data that will be inserted in the template\n            textToInsert = \"var columnDefs = [\"\n            for header in self.headers:\n                textToInsert += \"\"\"{\n                    field:\\\"%s\\\",\n                    cellRenderer: function(params) {\n                        if (typeof params.data[params.column.colId] === 'object') {\n                            if (params.data[params.column.colId].value == \\\"0\\\") {\n                                return params.data[params.column.colId].value;\n                            }\n                            if (params.data[params.column.colId].link == 'FALSE_LINK') {\n                                params.data[params.column.colId] = '<p>' + params.data[params.column.colId].value + '</p>';\n                                return params.data[params.column.colId];\n                            }\n                            if (params.data[params.column.colId].link != null) {\n                                if (params.data[params.column.colId].before_link != null) {\n                                    var prepend = params.data[params.column.colId].before_link;\n                                }\n                                else {\n                                    var prepend = \"\";\n                                }\n                                params.data[params.column.colId] = prepend + '<a onMouseOver=\"this.style.color=#99c3ff\" onMouseOut=\"this.style.color=#000\" href=\"' + params.data[params.column.colId].link + '\">'+ params.data[params.column.colId].value + '</a>';\n                                return params.data[params.column.colId];\n                            }\n                            return params.data[params.column.colId];\n                        }\n                        else {\n                            return params.value;\n                        }\n                    },\n                },\"\"\" % (\n                    header\n                )\n\n            textToInsert = textToInsert + \"];\\nvar rowData=%s;\\n\" % (self.data)\n\n            template_contents = grid_template.read()\n\n            new_contents = template_contents.replace(\"// DATA PLACEHOLDER\", textToInsert)\n\n            page_f.write(new_contents)"
         }
       }
-    }
+    },
+    "requests_keys": [
+      "get_fgpp"
+    ]
   },
   {
     "title": "\"Pre-Windows 2000 Compatible Access\" group",
@@ -2081,7 +2269,10 @@
         ],
         "code_map": {}
       }
-    }
+    },
+    "requests_keys": [
+      "pre_windows_2000_compatible_access_group"
+    ]
   },
   {
     "title": "Paths to servers",
@@ -2129,7 +2320,13 @@
           "hasPathToDA": "def hasPathToDA(\n    req, criticity=1\n):  # ne marche que partiellement : besoin de rajouter l'attribut has_path_to_DA dans toutes les requêtes pertinentes + dans domains.py/findAndCreatePathToDaFromComputersList\n    if req is None:\n        return -1\n\n    for object in req:\n        # print(object)\n        if not object.get(\"has_path_to_da\"):\n            continue\n        if object[\"has_path_to_da\"] == True:\n            # print(object)\n            return criticity\n\n    if len(req) > 0:\n        return criticity + 1\n\n    return 5"
         }
       }
-    }
+    },
+    "requests_keys": [
+      "users_admin_on_servers",
+      "users_admin_on_servers_list",
+      "servers_with_most_paths",
+      "users_admin_on_servers_all_data"
+    ]
   },
   {
     "title": "Machine accounts with inadequate privileges",
@@ -2171,7 +2368,10 @@
           "presence_of": "def presence_of(req, criticity=1, threshold=0):\n    if req is None:\n        return -1\n    if len(req) > threshold:\n        return criticity\n    return 5"
         }
       }
-    }
+    },
+    "requests_keys": [
+      "computers_members_high_privilege"
+    ]
   },
   {
     "title": "Ghost computers",
@@ -2221,7 +2421,11 @@
           "percentage_superior": "def percentage_superior(req, base, criticity=1, percentage=0, presence=False):\n    if req is None:\n        return -1\n    if base is None:\n        return -1\n    if len(base) == 0:\n        return -1\n\n    if len(base) and len(req) / len(base) > percentage:\n        return criticity\n\n    if presence:\n        if len(req) > 0:\n            return criticity + 1\n    return 5"
         }
       }
-    }
+    },
+    "requests_keys": [
+      "computers_not_connected_since",
+      "nb_computers"
+    ]
   },
   {
     "title": "Functional level of the domain",
@@ -2255,7 +2459,10 @@
           "Grid": "class Grid:\n    def __init__(self, title, template=\"grid\", classes=\"thead-light\"):\n        self.template_base_path = HTML_DIRECTORY / \"components/grid/\"\n        self.title = title\n        self.template = template\n        self.headers = []\n        self.data = \"\"\n        self.class_css = classes\n\n    def addheader(self, header):\n        self.headers.append(header)\n\n    def setheaders(self, header):\n        self.headers = header\n\n    def getHeaders(self):\n        return self.headers\n\n    def setData(self, data):\n        self.data = data\n\n    def render(self, page_f):\n        with open(self.template_base_path / (self.template + \"_template.html\"), \"r\") as grid_template:\n            # Grid data that will be inserted in the template\n            textToInsert = \"var columnDefs = [\"\n            for header in self.headers:\n                textToInsert += \"\"\"{\n                    field:\\\"%s\\\",\n                    cellRenderer: function(params) {\n                        if (typeof params.data[params.column.colId] === 'object') {\n                            if (params.data[params.column.colId].value == \\\"0\\\") {\n                                return params.data[params.column.colId].value;\n                            }\n                            if (params.data[params.column.colId].link == 'FALSE_LINK') {\n                                params.data[params.column.colId] = '<p>' + params.data[params.column.colId].value + '</p>';\n                                return params.data[params.column.colId];\n                            }\n                            if (params.data[params.column.colId].link != null) {\n                                if (params.data[params.column.colId].before_link != null) {\n                                    var prepend = params.data[params.column.colId].before_link;\n                                }\n                                else {\n                                    var prepend = \"\";\n                                }\n                                params.data[params.column.colId] = prepend + '<a onMouseOver=\"this.style.color=#99c3ff\" onMouseOut=\"this.style.color=#000\" href=\"' + params.data[params.column.colId].link + '\">'+ params.data[params.column.colId].value + '</a>';\n                                return params.data[params.column.colId];\n                            }\n                            return params.data[params.column.colId];\n                        }\n                        else {\n                            return params.value;\n                        }\n                    },\n                },\"\"\" % (\n                    header\n                )\n\n            textToInsert = textToInsert + \"];\\nvar rowData=%s;\\n\" % (self.data)\n\n            template_contents = grid_template.read()\n\n            new_contents = template_contents.replace(\"// DATA PLACEHOLDER\", textToInsert)\n\n            page_f.write(new_contents)"
         }
       }
-    }
+    },
+    "requests_keys": [
+      "vuln_functional_level"
+    ]
   },
   {
     "title": "OUs without any member",
@@ -2289,7 +2496,11 @@
           "Grid": "class Grid:\n    def __init__(self, title, template=\"grid\", classes=\"thead-light\"):\n        self.template_base_path = HTML_DIRECTORY / \"components/grid/\"\n        self.title = title\n        self.template = template\n        self.headers = []\n        self.data = \"\"\n        self.class_css = classes\n\n    def addheader(self, header):\n        self.headers.append(header)\n\n    def setheaders(self, header):\n        self.headers = header\n\n    def getHeaders(self):\n        return self.headers\n\n    def setData(self, data):\n        self.data = data\n\n    def render(self, page_f):\n        with open(self.template_base_path / (self.template + \"_template.html\"), \"r\") as grid_template:\n            # Grid data that will be inserted in the template\n            textToInsert = \"var columnDefs = [\"\n            for header in self.headers:\n                textToInsert += \"\"\"{\n                    field:\\\"%s\\\",\n                    cellRenderer: function(params) {\n                        if (typeof params.data[params.column.colId] === 'object') {\n                            if (params.data[params.column.colId].value == \\\"0\\\") {\n                                return params.data[params.column.colId].value;\n                            }\n                            if (params.data[params.column.colId].link == 'FALSE_LINK') {\n                                params.data[params.column.colId] = '<p>' + params.data[params.column.colId].value + '</p>';\n                                return params.data[params.column.colId];\n                            }\n                            if (params.data[params.column.colId].link != null) {\n                                if (params.data[params.column.colId].before_link != null) {\n                                    var prepend = params.data[params.column.colId].before_link;\n                                }\n                                else {\n                                    var prepend = \"\";\n                                }\n                                params.data[params.column.colId] = prepend + '<a onMouseOver=\"this.style.color=#99c3ff\" onMouseOut=\"this.style.color=#000\" href=\"' + params.data[params.column.colId].link + '\">'+ params.data[params.column.colId].value + '</a>';\n                                return params.data[params.column.colId];\n                            }\n                            return params.data[params.column.colId];\n                        }\n                        else {\n                            return params.value;\n                        }\n                    },\n                },\"\"\" % (\n                    header\n                )\n\n            textToInsert = textToInsert + \"];\\nvar rowData=%s;\\n\" % (self.data)\n\n            template_contents = grid_template.read()\n\n            new_contents = template_contents.replace(\"// DATA PLACEHOLDER\", textToInsert)\n\n            page_f.write(new_contents)"
         }
       }
-    }
+    },
+    "requests_keys": [
+      "get_empty_ous",
+      "nb_groups"
+    ]
   },
   {
     "title": "RDP access (users)",
@@ -2345,7 +2556,11 @@
         ],
         "code_map": {}
       }
-    }
+    },
+    "requests_keys": [
+      "rdp_access",
+      "nb_enabled_accounts"
+    ]
   },
   {
     "title": "Computers without LAPS",
@@ -2387,7 +2602,11 @@
           "days_format": "def days_format(nb_days: int, critical_time=90) -> str:\n    \"\"\"\n    Returns the date in a nice format\n    \"\"\"\n\n    critical_time = int(critical_time)\n\n    sortClass = str(nb_days).zfill(6)\n    if nb_days is None:\n        return f\"<i class='{sortClass} bi bi-x-circle' style='color: rgb(255, 89, 94);'></i> Unknown\"\n    if nb_days > 19000:\n        return f\"<i class='{sortClass} bi bi-x-circle' style='color: rgb(255, 89, 94);'></i> Never\"\n    y = nb_days // 365\n    m = (nb_days % 365) // 30\n    d = (nb_days % 365) % 30\n\n    color = \"#b00404\" if nb_days > 2 * critical_time else \"#e36402\" if nb_days > critical_time else \"#0a6e01\"\n\n    if y > 0:\n        return f\"<i class='{sortClass} bi bi-calendar3' style='color: {color};'></i> {y} year{'s' if y > 1 else ''}, {m} month{'s' if m > 1 else ''} and {d} day{'s' if d > 1 else ''}\"\n    elif m > 0:\n        return f\"<i class='{sortClass} bi bi-calendar3' style='color: {color};'></i> {m} month{'s' if m > 1 else ''} and {d} day{'s' if d > 1 else ''}\"\n    else:\n        return f\"<i class='{sortClass} bi bi-calendar3' style='color: {color};'></i> {d} day{'s' if d > 1 else ''}\""
         }
       }
-    }
+    },
+    "requests_keys": [
+      "nb_computers_laps",
+      "nb_computers"
+    ]
   },
   {
     "title": "Access to LAPS passwords",
@@ -2421,7 +2640,11 @@
           "Grid": "class Grid:\n    def __init__(self, title, template=\"grid\", classes=\"thead-light\"):\n        self.template_base_path = HTML_DIRECTORY / \"components/grid/\"\n        self.title = title\n        self.template = template\n        self.headers = []\n        self.data = \"\"\n        self.class_css = classes\n\n    def addheader(self, header):\n        self.headers.append(header)\n\n    def setheaders(self, header):\n        self.headers = header\n\n    def getHeaders(self):\n        return self.headers\n\n    def setData(self, data):\n        self.data = data\n\n    def render(self, page_f):\n        with open(self.template_base_path / (self.template + \"_template.html\"), \"r\") as grid_template:\n            # Grid data that will be inserted in the template\n            textToInsert = \"var columnDefs = [\"\n            for header in self.headers:\n                textToInsert += \"\"\"{\n                    field:\\\"%s\\\",\n                    cellRenderer: function(params) {\n                        if (typeof params.data[params.column.colId] === 'object') {\n                            if (params.data[params.column.colId].value == \\\"0\\\") {\n                                return params.data[params.column.colId].value;\n                            }\n                            if (params.data[params.column.colId].link == 'FALSE_LINK') {\n                                params.data[params.column.colId] = '<p>' + params.data[params.column.colId].value + '</p>';\n                                return params.data[params.column.colId];\n                            }\n                            if (params.data[params.column.colId].link != null) {\n                                if (params.data[params.column.colId].before_link != null) {\n                                    var prepend = params.data[params.column.colId].before_link;\n                                }\n                                else {\n                                    var prepend = \"\";\n                                }\n                                params.data[params.column.colId] = prepend + '<a onMouseOver=\"this.style.color=#99c3ff\" onMouseOut=\"this.style.color=#000\" href=\"' + params.data[params.column.colId].link + '\">'+ params.data[params.column.colId].value + '</a>';\n                                return params.data[params.column.colId];\n                            }\n                            return params.data[params.column.colId];\n                        }\n                        else {\n                            return params.value;\n                        }\n                    },\n                },\"\"\" % (\n                    header\n                )\n\n            textToInsert = textToInsert + \"];\\nvar rowData=%s;\\n\" % (self.data)\n\n            template_contents = grid_template.read()\n\n            new_contents = template_contents.replace(\"// DATA PLACEHOLDER\", textToInsert)\n\n            page_f.write(new_contents)"
         }
       }
-    }
+    },
+    "requests_keys": [
+      "can_read_laps",
+      "nb_domain_admins"
+    ]
   },
   {
     "title": "Shadow credentials on domain controllers",
@@ -2448,7 +2671,16 @@
           "createGraphPage": "def createGraphPage(\n    render_prefix, page_name, page_title, page_description, graph_data, requests_results\n):\n    page = Page(render_prefix, page_name, page_title, page_description)\n    graph = Graph()\n    graph.setPaths(graph_data)\n\n    graph.addGhostComputers(requests_results[\"dico_ghost_computer\"])\n    graph.addGhostUsers(requests_results[\"dico_ghost_user\"])\n    graph.addDCComputers(requests_results[\"dico_dc_computer\"])\n    graph.addUserDA(requests_results[\"dico_user_da\"])\n    graph.addGroupDA(requests_results[\"dico_da_group\"])\n    graph.addKerberoastableUsers(requests_results[\"dico_is_kerberoastable\"])\n\n    page.addComponent(graph)\n    page.render()"
         }
       }
-    }
+    },
+    "requests_keys": [
+      "dc_impersonation",
+      "dico_ghost_computer",
+      "dico_ghost_user",
+      "dico_dc_computer",
+      "dico_user_da",
+      "dico_da_group",
+      "dico_is_kerberoastable"
+    ]
   },
   {
     "title": "Kerberoastable accounts",
@@ -2505,6 +2737,9 @@
         ],
         "code_map": {}
       }
-    }
+    },
+    "requests_keys": [
+      "nb_kerberoastable_accounts"
+    ]
   }
 ]

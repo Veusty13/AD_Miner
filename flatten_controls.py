@@ -67,6 +67,12 @@ def get_import_map(import_lines: List[str], root_path: Path = Path(".")) -> Dict
     return full_map
 
 
+def get_request_keys(input_string: str) -> List[str]: 
+    pattern = r'requests_results\[\s*["\']([^"\']+)["\']\s*\]'
+    all_occurences = re.findall(pattern, input_string)
+    return all_occurences
+
+
 def load_control_map(implemented_controls_map_path: str):
     try:
         with open(implemented_controls_map_path, "r") as file:
@@ -86,6 +92,7 @@ class ControlInfo:
         self.code: str = code
         self.code_lines: list[str] = []
         self.dependencies: Dict[str, Dict[str, object]] = []
+        self.requests_keys: List = []
 
     def get_code_lines(self) -> None:
         self.code_lines = self.code.split("\n")    
@@ -101,6 +108,15 @@ class ControlInfo:
 
     def get_control_category(self, implemented_controls_map) -> None:
         self.control_category = implemented_controls_map[self.title]
+      
+    def get_requests_results(self) -> None:
+        request_keys_code = get_request_keys(input_string=self.code)
+        self.requests_keys += request_keys_code
+        for _, value in self.dependencies.items():
+            code_map = value["code_map"]
+            for imported_element, code in code_map.items():
+                request_keys_code_imported_element = get_request_keys(input_string=code)
+                self.requests_keys += request_keys_code_imported_element
 
 
 class ControlInfoGatherer:
@@ -130,6 +146,7 @@ class ControlInfoGatherer:
             control_info.get_control_dependencies()
             control_info.get_title()
             control_info.get_control_category(self.implemented_controls_map)
+            control_info.get_requests_results()
             self.list_control_info.append(control_info)
 
     def save_controls_as_json(self) -> None: 
@@ -143,7 +160,8 @@ class ControlInfoGatherer:
                 "file_name": control_info.file_name,
                 "control_category": control_info.control_category,
                 "code": control_info.code,
-                "dependencies": control_info.dependencies
+                "dependencies": control_info.dependencies,
+                "requests_keys": control_info.requests_keys
             })
 
         with open(output_path, "w", encoding="utf-8") as f:
