@@ -235,9 +235,6 @@ def main() -> None:
 
     requests_results = populate_data_and_cache(neo4j)
 
-    with open("llm_assets/requests_results.json", "w") as f:
-        json.dump(serialize_entire_dict(remove_fields(neo4j.all_requests)), f, indent=4)
-
     # Define legacy dicts
     dico_name_description = {}
 
@@ -359,6 +356,13 @@ def main() -> None:
     logger.print_success(
         f"{utils.timer_format(time.time() - start)}! Program finished. Report generated in render_{arguments.cache_prefix}"
     )
+
+    requests_knowledge = remove_fields(neo4j.all_requests)
+    for k, v in requests_results.items():
+        if k not in requests_knowledge.keys():
+            requests_knowledge[k] = v
+    with open("llm_assets/requests_results.json", "w") as f:
+        json.dump(serialize_entire_dict(requests_knowledge), f, indent=4)
 
 
 if __name__ == "__main__":
