@@ -6,7 +6,6 @@ import re
 from pathlib import Path
 import ast
 
-
 def extract_objects_code(code: str, objects: List[str]) -> Dict[str, str]:
     tree = ast.parse(code)
     lines = code.splitlines()
@@ -77,7 +76,7 @@ def load_control_map(implemented_controls_map_path: str):
     try:
         with open(implemented_controls_map_path, "r") as file:
             implemented_controls_map = json.load(file)
-        print(f"Loaded control name -> category mapping from {implemented_controls_map_path}")
+        print(f"\nLoaded control name -> category mapping from {implemented_controls_map_path}")
         return implemented_controls_map
     except FileNotFoundError as e:
         print(f"File not found: {implemented_controls_map_path}")
@@ -108,15 +107,16 @@ class ControlInfo:
 
     def get_control_category(self, implemented_controls_map) -> None:
         self.control_category = implemented_controls_map[self.title]
-      
+
     def get_requests_results(self) -> None:
         request_keys_code = get_request_keys(input_string=self.code)
         self.requests_keys += request_keys_code
         for _, value in self.dependencies.items():
             code_map = value["code_map"]
-            for imported_element, code in code_map.items():
+            for _, code in code_map.items():
                 request_keys_code_imported_element = get_request_keys(input_string=code)
                 self.requests_keys += request_keys_code_imported_element
+        self.requests_keys = list(set(self.requests_keys))
 
 
 class ControlInfoGatherer:
@@ -130,10 +130,11 @@ class ControlInfoGatherer:
         control_file_names = [
             file_name for file_name in os.listdir(self.controls_folder)
             if (file_name.endswith(".py") and
-                not file_name.startswith("azure") and 
+                not file_name.startswith("azure") and
                 not file_name in ["__init__.py", "smolcard_class.py", "control_template.py"])
         ]
-        print(control_file_names)
+        control_file_names_print = "\n    ->  " + "\n    ->  ".join(control_file_names)
+        print(f"\nAbout to parse the following controls : {control_file_names_print}")
         for file_name in control_file_names:
             try:
                 with open(os.path.join(self.controls_folder, file_name), "r", encoding="utf-8") as f:
@@ -148,6 +149,7 @@ class ControlInfoGatherer:
             control_info.get_control_category(self.implemented_controls_map)
             control_info.get_requests_results()
             self.list_control_info.append(control_info)
+        print("\nDone extracting controls data from the list of files above")
 
     def save_controls_as_json(self) -> None: 
         output_path = os.path.join(self.ouput_folder, "all_controls_info.json")
@@ -163,14 +165,20 @@ class ControlInfoGatherer:
                 "dependencies": control_info.dependencies,
                 "requests_keys": control_info.requests_keys
             })
+        try:
+            with open(output_path, "w", encoding="utf-8") as f:
+                json.dump(parsed_controls, f, ensure_ascii=False, indent=2)
+            print(f"\nDone saving controls data at {output_path}")
+        except TypeError as e:
+            print("\nThere was an error saving the file, one of the elements might not be json serializable")
+            raise e
 
-        with open(output_path, "w", encoding="utf-8") as f:
-            json.dump(parsed_controls, f, ensure_ascii=False, indent=2)
 
+if __name__ == "__main__":
 
-implemented_control_path = "llm_assets/implemented_controls_map.json"
-output_folder = "llm_assets"
-implemented_controls_map = load_control_map(implemented_controls_map_path=implemented_control_path)
-control_gatherer = ControlInfoGatherer(output_folder=output_folder, implemented_controls_map=implemented_controls_map)
-control_gatherer.get_controls()
-control_gatherer.save_controls_as_json()
+    implemented_control_path = "agent/llm_assets/implemented_controls_map.json"
+    output_folder = "agent/llm_assets"
+    implemented_controls_map = load_control_map(implemented_controls_map_path=implemented_control_path)
+    control_gatherer = ControlInfoGatherer(output_folder=output_folder, implemented_controls_map=implemented_controls_map)
+    control_gatherer.get_controls()
+    control_gatherer.save_controls_as_json()
