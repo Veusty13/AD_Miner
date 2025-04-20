@@ -52,7 +52,7 @@ def serialize_entire_dict(data):
             return {k: serialize(v) for k, v in obj.items()}
         elif isinstance(obj, list):
             return [serialize(v) for v in obj]
-        elif hasattr(obj, '__dict__'):
+        elif hasattr(obj, "__dict__"):
             cls_name = obj.__class__.__name__
             attrs = {
                 k: serialize(v)
@@ -62,11 +62,15 @@ def serialize_entire_dict(data):
             return {"__class__": cls_name, **attrs}
         else:
             return obj  # str, int, float, None, bool etc.
+
     return serialize(data)
 
 
 def remove_fields(data):
-    return {k: {x: y for x, y in v.items() if x not in ["output_type", "postProcessing"]} for k, v in data.items()}
+    return {
+        k: {x: y for x, y in v.items() if x not in ["output_type", "postProcessing"]}
+        for k, v in data.items()
+    }
 
 
 # Do all the requests (if cached, retrieve from cache, else store in cache)
@@ -125,7 +129,6 @@ def populate_data_and_cache(neo4j: Neo4j) -> dict:
             )
 
     neo4j.compute_common_cache(requests_results)
-
 
     return requests_results
 
@@ -187,14 +190,14 @@ def main() -> None:
 
     prepare_render(arguments)
 
-    neo4j_version, extract_date, total_objects, number_relations, boolean_azure = pre_request(
-        arguments
+    neo4j_version, extract_date, total_objects, number_relations, boolean_azure = (
+        pre_request(arguments)
     )
     arguments.boolean_azure = boolean_azure
-    version = neo4j_version.get('version')
+    version = neo4j_version.get("version")
     logger.print_success("Your neo4j database uses neo4j version " + version)
 
-    if not version.startswith('4.4.'):
+    if not version.startswith("4.4."):
         logger.print_error(
             "Your neo4j database version must be 4.4.X in order to fully use AD Miner"
         )
@@ -361,7 +364,7 @@ def main() -> None:
     for k, v in requests_results.items():
         if k not in requests_knowledge.keys():
             requests_knowledge[k] = v
-    with open("llm_assets/requests_results.json", "w") as f:
+    with open("agent/llm_assets/requests_results.json", "w") as f:
         json.dump(serialize_entire_dict(requests_knowledge), f, indent=4)
 
 
