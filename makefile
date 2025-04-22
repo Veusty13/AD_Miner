@@ -3,3 +3,6 @@ run-audit :
 
 build-knowledge-data : 
 	python agent/get_llm_assets.py
+
+run-server :
+	fastapi dev agent/api/main.py
