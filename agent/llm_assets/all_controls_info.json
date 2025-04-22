@@ -75,12 +75,6 @@
         "code_map": {
           "Grid": "class Grid:\n    def __init__(self, title, template=\"grid\", classes=\"thead-light\"):\n        self.template_base_path = HTML_DIRECTORY / \"components/grid/\"\n        self.title = title\n        self.template = template\n        self.headers = []\n        self.data = \"\"\n        self.class_css = classes\n\n    def addheader(self, header):\n        self.headers.append(header)\n\n    def setheaders(self, header):\n        self.headers = header\n\n    def getHeaders(self):\n        return self.headers\n\n    def setData(self, data):\n        self.data = data\n\n    def render(self, page_f):\n        with open(self.template_base_path / (self.template + \"_template.html\"), \"r\") as grid_template:\n            # Grid data that will be inserted in the template\n            textToInsert = \"var columnDefs = [\"\n            for header in self.headers:\n                textToInsert += \"\"\"{\n                    field:\\\"%s\\\",\n                    cellRenderer: function(params) {\n                        if (typeof params.data[params.column.colId] === 'object') {\n                            if (params.data[params.column.colId].value == \\\"0\\\") {\n                                return params.data[params.column.colId].value;\n                            }\n                            if (params.data[params.column.colId].link == 'FALSE_LINK') {\n                                params.data[params.column.colId] = '<p>' + params.data[params.column.colId].value + '</p>';\n                                return params.data[params.column.colId];\n                            }\n                            if (params.data[params.column.colId].link != null) {\n                                if (params.data[params.column.colId].before_link != null) {\n                                    var prepend = params.data[params.column.colId].before_link;\n                                }\n                                else {\n                                    var prepend = \"\";\n                                }\n                                params.data[params.column.colId] = prepend + '<a onMouseOver=\"this.style.color=#99c3ff\" onMouseOut=\"this.style.color=#000\" href=\"' + params.data[params.column.colId].link + '\">'+ params.data[params.column.colId].value + '</a>';\n                                return params.data[params.column.colId];\n                            }\n                            return params.data[params.column.colId];\n                        }\n                        else {\n                            return params.value;\n                        }\n                    },\n                },\"\"\" % (\n                    header\n                )\n\n            textToInsert = textToInsert + \"];\\nvar rowData=%s;\\n\" % (self.data)\n\n            template_contents = grid_template.read()\n\n            new_contents = template_contents.replace(\"// DATA PLACEHOLDER\", textToInsert)\n\n            page_f.write(new_contents)"
         }
-      },
-      "/Users/steverassinot/Repos/AD_Miner/ad_miner/sources/modules/__init__.py": {
-        "imported_elements": [
-          "generic_formating"
-        ],
-        "code_map": {}
       }
     },
     "requests_keys": [
@@ -102,12 +96,6 @@
           "register_control": "def register_control(cls):\n    \"Decorator to register every control that should be run by AD Miner\"\n    control_list.append(cls)\n    return cls",
           "Control": "class Control:\n    \"\"\"Every control should inheritate from this class.\n    It contains requests results and define essential structure.\"\"\"\n\n    def __init__(self, arguments, requests_results) -> None:\n        self.arguments = arguments\n        self.requests_results = requests_results\n        self.title = \"\"\n        self.description = \"\"\n        self.interpretation = \"\"\n        self.risk = \"\"\n        self.poa = \"\"\n\n    def run(self):\n        error_message = \"Your control \" + str(self)\n        error_message += \" should have a run() function defined.\"\n        raise NotImplementedError(error_message)\n\n    def get_rating(self) -> int:\n        error_message = \"Your control \" + str(self)\n        error_message += \" should have a get_rating() function defined.\"\n        raise NotImplementedError(error_message)\n\n    def get_dico_description(self) -> dict:\n        self.dico_description: dict[str, str] = {\n            \"title\": self.title,\n            \"description\": self.description,\n            \"interpretation\": self.interpretation,\n            \"risk\": self.risk,\n            \"poa\": self.poa,\n        }\n        return self.dico_description"
         }
-      },
-      "/Users/steverassinot/Repos/AD_Miner/ad_miner/sources/modules/__init__.py": {
-        "imported_elements": [
-          "logger"
-        ],
-        "code_map": {}
       },
       "ad_miner/sources/modules/page_class.py": {
         "imported_elements": [
@@ -157,12 +145,6 @@
         "code_map": {
           "presence_of": "def presence_of(req, criticity=1, threshold=0):\n    if req is None:\n        return -1\n    if len(req) > threshold:\n        return criticity\n    return 5"
         }
-      },
-      "/Users/steverassinot/Repos/AD_Miner/urllib/parse/__init__.py": {
-        "imported_elements": [
-          "quote"
-        ],
-        "code_map": {}
       }
     },
     "requests_keys": [
@@ -208,25 +190,6 @@
         "code_map": {
           "grid_data_stringify": "def grid_data_stringify(raw_data: dict) -> str:\n    \"\"\"\n    Transform a dict to a string for the grid formating. This is a dumb fix for the sorting with hyperlink.\n    dict format :\n    {\n        \"link\",\n        \"value\",\n        \"before_link\"\n    }\n    \"\"\"\n    link = raw_data['link'].replace(sep, '_').replace('/', '_')\n    try:\n        return f\"{raw_data['before_link']} <a class=\\\"grid-link\\\" href='{link}'>{raw_data['value']}&nbsp;<i class='bi bi-box-arrow-up-right' style='color: #0969da;'></i></a>\"\n    except KeyError:\n        return f\"<a class=\\\"grid-link\\\" href='{link}'>{raw_data['value']}&nbsp;<i class='bi bi-box-arrow-up-right' style='color: #0969da;'></i></a>\""
         }
-      },
-      "/Users/steverassinot/Repos/AD_Miner/ad_miner/sources/modules/__init__.py": {
-        "imported_elements": [
-          "generic_formating",
-          ""
-        ],
-        "code_map": {}
-      },
-      "ad_miner/sources/modules/common_analysis.py": {
-        "imported_elements": [
-          "("
-        ],
-        "code_map": {}
-      },
-      "/Users/steverassinot/Repos/AD_Miner/urllib/parse/__init__.py": {
-        "imported_elements": [
-          "quote"
-        ],
-        "code_map": {}
       }
     },
     "requests_keys": [
@@ -288,17 +251,11 @@
         "code_map": {
           "presence_of": "def presence_of(req, criticity=1, threshold=0):\n    if req is None:\n        return -1\n    if len(req) > threshold:\n        return criticity\n    return 5"
         }
-      },
-      "/Users/steverassinot/Repos/AD_Miner/urllib/parse/__init__.py": {
-        "imported_elements": [
-          "quote"
-        ],
-        "code_map": {}
       }
     },
     "requests_keys": [
-      "objects_to_operators_member",
-      "objects_to_operators_groups"
+      "objects_to_operators_groups",
+      "objects_to_operators_member"
     ]
   },
   {
@@ -468,12 +425,6 @@
         "code_map": {
           "presence_of": "def presence_of(req, criticity=1, threshold=0):\n    if req is None:\n        return -1\n    if len(req) > threshold:\n        return criticity\n    return 5"
         }
-      },
-      "/Users/steverassinot/Repos/AD_Miner/urllib/parse/__init__.py": {
-        "imported_elements": [
-          "quote"
-        ],
-        "code_map": {}
       }
     },
     "requests_keys": [
@@ -575,8 +526,8 @@
       }
     },
     "requests_keys": [
-      "nb_computers",
-      "computers_not_connected_since"
+      "computers_not_connected_since",
+      "nb_computers"
     ]
   },
   {
@@ -594,12 +545,6 @@
           "register_control": "def register_control(cls):\n    \"Decorator to register every control that should be run by AD Miner\"\n    control_list.append(cls)\n    return cls",
           "Control": "class Control:\n    \"\"\"Every control should inheritate from this class.\n    It contains requests results and define essential structure.\"\"\"\n\n    def __init__(self, arguments, requests_results) -> None:\n        self.arguments = arguments\n        self.requests_results = requests_results\n        self.title = \"\"\n        self.description = \"\"\n        self.interpretation = \"\"\n        self.risk = \"\"\n        self.poa = \"\"\n\n    def run(self):\n        error_message = \"Your control \" + str(self)\n        error_message += \" should have a run() function defined.\"\n        raise NotImplementedError(error_message)\n\n    def get_rating(self) -> int:\n        error_message = \"Your control \" + str(self)\n        error_message += \" should have a get_rating() function defined.\"\n        raise NotImplementedError(error_message)\n\n    def get_dico_description(self) -> dict:\n        self.dico_description: dict[str, str] = {\n            \"title\": self.title,\n            \"description\": self.description,\n            \"interpretation\": self.interpretation,\n            \"risk\": self.risk,\n            \"poa\": self.poa,\n        }\n        return self.dico_description"
         }
-      },
-      "/Users/steverassinot/Repos/AD_Miner/ad_miner/sources/modules/__init__.py": {
-        "imported_elements": [
-          "logger"
-        ],
-        "code_map": {}
       },
       "ad_miner/sources/modules/page_class.py": {
         "imported_elements": [
@@ -633,23 +578,11 @@
         "code_map": {
           "presence_of": "def presence_of(req, criticity=1, threshold=0):\n    if req is None:\n        return -1\n    if len(req) > threshold:\n        return criticity\n    return 5"
         }
-      },
-      "/Users/steverassinot/Repos/AD_Miner/urllib/parse/__init__.py": {
-        "imported_elements": [
-          "quote"
-        ],
-        "code_map": {}
-      },
-      "/Users/steverassinot/Repos/AD_Miner/tqdm/__init__.py": {
-        "imported_elements": [
-          "tqdm"
-        ],
-        "code_map": {}
       }
     },
     "requests_keys": [
-      "graph_rbcd_to_da",
-      "graph_rbcd"
+      "graph_rbcd",
+      "graph_rbcd_to_da"
     ]
   },
   {
@@ -684,13 +617,6 @@
           "Grid": "class Grid:\n    def __init__(self, title, template=\"grid\", classes=\"thead-light\"):\n        self.template_base_path = HTML_DIRECTORY / \"components/grid/\"\n        self.title = title\n        self.template = template\n        self.headers = []\n        self.data = \"\"\n        self.class_css = classes\n\n    def addheader(self, header):\n        self.headers.append(header)\n\n    def setheaders(self, header):\n        self.headers = header\n\n    def getHeaders(self):\n        return self.headers\n\n    def setData(self, data):\n        self.data = data\n\n    def render(self, page_f):\n        with open(self.template_base_path / (self.template + \"_template.html\"), \"r\") as grid_template:\n            # Grid data that will be inserted in the template\n            textToInsert = \"var columnDefs = [\"\n            for header in self.headers:\n                textToInsert += \"\"\"{\n                    field:\\\"%s\\\",\n                    cellRenderer: function(params) {\n                        if (typeof params.data[params.column.colId] === 'object') {\n                            if (params.data[params.column.colId].value == \\\"0\\\") {\n                                return params.data[params.column.colId].value;\n                            }\n                            if (params.data[params.column.colId].link == 'FALSE_LINK') {\n                                params.data[params.column.colId] = '<p>' + params.data[params.column.colId].value + '</p>';\n                                return params.data[params.column.colId];\n                            }\n                            if (params.data[params.column.colId].link != null) {\n                                if (params.data[params.column.colId].before_link != null) {\n                                    var prepend = params.data[params.column.colId].before_link;\n                                }\n                                else {\n                                    var prepend = \"\";\n                                }\n                                params.data[params.column.colId] = prepend + '<a onMouseOver=\"this.style.color=#99c3ff\" onMouseOut=\"this.style.color=#000\" href=\"' + params.data[params.column.colId].link + '\">'+ params.data[params.column.colId].value + '</a>';\n                                return params.data[params.column.colId];\n                            }\n                            return params.data[params.column.colId];\n                        }\n                        else {\n                            return params.value;\n                        }\n                    },\n                },\"\"\" % (\n                    header\n                )\n\n            textToInsert = textToInsert + \"];\\nvar rowData=%s;\\n\" % (self.data)\n\n            template_contents = grid_template.read()\n\n            new_contents = template_contents.replace(\"// DATA PLACEHOLDER\", textToInsert)\n\n            page_f.write(new_contents)"
         }
       },
-      "/Users/steverassinot/Repos/AD_Miner/ad_miner/sources/modules/__init__.py": {
-        "imported_elements": [
-          "generic_formating",
-          ""
-        ],
-        "code_map": {}
-      },
       "ad_miner/sources/modules/common_analysis.py": {
         "imported_elements": [
           "presence_of"
@@ -698,17 +624,11 @@
         "code_map": {
           "presence_of": "def presence_of(req, criticity=1, threshold=0):\n    if req is None:\n        return -1\n    if len(req) > threshold:\n        return criticity\n    return 5"
         }
-      },
-      "/Users/steverassinot/Repos/AD_Miner/urllib/parse/__init__.py": {
-        "imported_elements": [
-          "quote"
-        ],
-        "code_map": {}
       }
     },
     "requests_keys": [
-      "has_sid_history",
-      "users_admin_on_computers"
+      "users_admin_on_computers",
+      "has_sid_history"
     ]
   },
   {
@@ -806,9 +726,9 @@
       }
     },
     "requests_keys": [
-      "admin_list",
       "dormant_accounts",
-      "nb_enabled_accounts"
+      "nb_enabled_accounts",
+      "admin_list"
     ]
   },
   {
@@ -859,22 +779,16 @@
         "code_map": {
           "createGraphPage": "def createGraphPage(\n    render_prefix, page_name, page_title, page_description, graph_data, requests_results\n):\n    page = Page(render_prefix, page_name, page_title, page_description)\n    graph = Graph()\n    graph.setPaths(graph_data)\n\n    graph.addGhostComputers(requests_results[\"dico_ghost_computer\"])\n    graph.addGhostUsers(requests_results[\"dico_ghost_user\"])\n    graph.addDCComputers(requests_results[\"dico_dc_computer\"])\n    graph.addUserDA(requests_results[\"dico_user_da\"])\n    graph.addGroupDA(requests_results[\"dico_da_group\"])\n    graph.addKerberoastableUsers(requests_results[\"dico_is_kerberoastable\"])\n\n    page.addComponent(graph)\n    page.render()"
         }
-      },
-      "/Users/steverassinot/Repos/AD_Miner/urllib/parse/__init__.py": {
-        "imported_elements": [
-          "quote"
-        ],
-        "code_map": {}
       }
     },
     "requests_keys": [
-      "dico_ghost_computer",
-      "dico_da_group",
+      "dico_user_da",
       "dom_admin_on_non_dc",
-      "dico_dc_computer",
+      "dico_da_group",
+      "dico_ghost_computer",
       "dico_is_kerberoastable",
       "dico_ghost_user",
-      "dico_user_da"
+      "dico_dc_computer"
     ]
   },
   {
@@ -970,12 +884,6 @@
         "code_map": {
           "presence_of": "def presence_of(req, criticity=1, threshold=0):\n    if req is None:\n        return -1\n    if len(req) > threshold:\n        return criticity\n    return 5"
         }
-      },
-      "/Users/steverassinot/Repos/AD_Miner/urllib/parse/__init__.py": {
-        "imported_elements": [
-          "quote"
-        ],
-        "code_map": {}
       }
     },
     "requests_keys": [
@@ -1009,13 +917,13 @@
       }
     },
     "requests_keys": [
-      "dico_ghost_computer",
+      "dico_user_da",
+      "dc_impersonation",
       "dico_da_group",
-      "dico_dc_computer",
+      "dico_ghost_computer",
       "dico_is_kerberoastable",
       "dico_ghost_user",
-      "dc_impersonation",
-      "dico_user_da"
+      "dico_dc_computer"
     ]
   },
   {
@@ -1126,17 +1034,11 @@
         "code_map": {
           "presence_of": "def presence_of(req, criticity=1, threshold=0):\n    if req is None:\n        return -1\n    if len(req) > threshold:\n        return criticity\n    return 5"
         }
-      },
-      "/Users/steverassinot/Repos/AD_Miner/urllib/parse/__init__.py": {
-        "imported_elements": [
-          "quote"
-        ],
-        "code_map": {}
       }
     },
     "requests_keys": [
-      "nb_domain_collected",
-      "da_to_da"
+      "da_to_da",
+      "nb_domain_collected"
     ]
   },
   {
@@ -1255,8 +1157,8 @@
       }
     },
     "requests_keys": [
-      "nb_groups",
-      "get_empty_ous"
+      "get_empty_ous",
+      "nb_groups"
     ]
   },
   {
@@ -1314,12 +1216,6 @@
         "code_map": {
           "presence_of": "def presence_of(req, criticity=1, threshold=0):\n    if req is None:\n        return -1\n    if len(req) > threshold:\n        return criticity\n    return 5"
         }
-      },
-      "/Users/steverassinot/Repos/AD_Miner/urllib/parse/__init__.py": {
-        "imported_elements": [
-          "quote"
-        ],
-        "code_map": {}
       }
     },
     "requests_keys": [
@@ -1376,14 +1272,14 @@
       }
     },
     "requests_keys": [
-      "dico_ghost_computer",
-      "cross_domain_domain_admins",
-      "cross_domain_local_admins",
+      "dico_user_da",
       "dico_da_group",
-      "dico_dc_computer",
+      "dico_ghost_computer",
+      "cross_domain_local_admins",
+      "cross_domain_domain_admins",
       "dico_is_kerberoastable",
       "dico_ghost_user",
-      "dico_user_da"
+      "dico_dc_computer"
     ]
   },
   {
@@ -1401,12 +1297,6 @@
           "register_control": "def register_control(cls):\n    \"Decorator to register every control that should be run by AD Miner\"\n    control_list.append(cls)\n    return cls",
           "Control": "class Control:\n    \"\"\"Every control should inheritate from this class.\n    It contains requests results and define essential structure.\"\"\"\n\n    def __init__(self, arguments, requests_results) -> None:\n        self.arguments = arguments\n        self.requests_results = requests_results\n        self.title = \"\"\n        self.description = \"\"\n        self.interpretation = \"\"\n        self.risk = \"\"\n        self.poa = \"\"\n\n    def run(self):\n        error_message = \"Your control \" + str(self)\n        error_message += \" should have a run() function defined.\"\n        raise NotImplementedError(error_message)\n\n    def get_rating(self) -> int:\n        error_message = \"Your control \" + str(self)\n        error_message += \" should have a get_rating() function defined.\"\n        raise NotImplementedError(error_message)\n\n    def get_dico_description(self) -> dict:\n        self.dico_description: dict[str, str] = {\n            \"title\": self.title,\n            \"description\": self.description,\n            \"interpretation\": self.interpretation,\n            \"risk\": self.risk,\n            \"poa\": self.poa,\n        }\n        return self.dico_description"
         }
-      },
-      "/Users/steverassinot/Repos/AD_Miner/ad_miner/sources/modules/__init__.py": {
-        "imported_elements": [
-          "logger"
-        ],
-        "code_map": {}
       },
       "ad_miner/sources/modules/page_class.py": {
         "imported_elements": [
@@ -1440,22 +1330,16 @@
         "code_map": {
           "presence_of": "def presence_of(req, criticity=1, threshold=0):\n    if req is None:\n        return -1\n    if len(req) > threshold:\n        return criticity\n    return 5"
         }
-      },
-      "/Users/steverassinot/Repos/AD_Miner/urllib/parse/__init__.py": {
-        "imported_elements": [
-          "quote"
-        ],
-        "code_map": {}
       }
     },
     "requests_keys": [
-      "domains_to_domain_admin",
-      "computers_to_domain_admin",
-      "groups_to_domain_admin",
-      "nb_domain_collected",
-      "domains",
       "objects_to_domain_admin",
-      "users_to_domain_admin"
+      "nb_domain_collected",
+      "users_to_domain_admin",
+      "domains_to_domain_admin",
+      "groups_to_domain_admin",
+      "domains",
+      "computers_to_domain_admin"
     ]
   },
   {
@@ -1505,12 +1389,6 @@
         "code_map": {
           "percentage_superior": "def percentage_superior(req, base, criticity=1, percentage=0, presence=False):\n    if req is None:\n        return -1\n    if base is None:\n        return -1\n    if len(base) == 0:\n        return -1\n\n    if len(base) and len(req) / len(base) > percentage:\n        return criticity\n\n    if presence:\n        if len(req) > 0:\n            return criticity + 1\n    return 5"
         }
-      },
-      "/Users/steverassinot/Repos/AD_Miner/urllib/parse/__init__.py": {
-        "imported_elements": [
-          "quote"
-        ],
-        "code_map": {}
       }
     },
     "requests_keys": [
@@ -1586,12 +1464,6 @@
           "register_control": "def register_control(cls):\n    \"Decorator to register every control that should be run by AD Miner\"\n    control_list.append(cls)\n    return cls",
           "Control": "class Control:\n    \"\"\"Every control should inheritate from this class.\n    It contains requests results and define essential structure.\"\"\"\n\n    def __init__(self, arguments, requests_results) -> None:\n        self.arguments = arguments\n        self.requests_results = requests_results\n        self.title = \"\"\n        self.description = \"\"\n        self.interpretation = \"\"\n        self.risk = \"\"\n        self.poa = \"\"\n\n    def run(self):\n        error_message = \"Your control \" + str(self)\n        error_message += \" should have a run() function defined.\"\n        raise NotImplementedError(error_message)\n\n    def get_rating(self) -> int:\n        error_message = \"Your control \" + str(self)\n        error_message += \" should have a get_rating() function defined.\"\n        raise NotImplementedError(error_message)\n\n    def get_dico_description(self) -> dict:\n        self.dico_description: dict[str, str] = {\n            \"title\": self.title,\n            \"description\": self.description,\n            \"interpretation\": self.interpretation,\n            \"risk\": self.risk,\n            \"poa\": self.poa,\n        }\n        return self.dico_description"
         }
-      },
-      "/Users/steverassinot/Repos/AD_Miner/ad_miner/sources/modules/__init__.py": {
-        "imported_elements": [
-          "generic_formating"
-        ],
-        "code_map": {}
       },
       "ad_miner/sources/modules/page_class.py": {
         "imported_elements": [
@@ -1677,20 +1549,14 @@
         "code_map": {
           "presence_of": "def presence_of(req, criticity=1, threshold=0):\n    if req is None:\n        return -1\n    if len(req) > threshold:\n        return criticity\n    return 5"
         }
-      },
-      "/Users/steverassinot/Repos/AD_Miner/urllib/parse/__init__.py": {
-        "imported_elements": [
-          "quote"
-        ],
-        "code_map": {}
       }
     },
     "requests_keys": [
-      "set_dcsync1",
+      "nb_domain_admins",
       "objects_to_dcsync",
       "dcsync_list",
-      "nb_domain_admins",
-      "set_dcsync2"
+      "set_dcsync2",
+      "set_dcsync1"
     ]
   },
   {
@@ -1735,8 +1601,8 @@
       }
     },
     "requests_keys": [
-      "nb_computers",
-      "nb_computers_laps"
+      "nb_computers_laps",
+      "nb_computers"
     ]
   },
   {
@@ -1773,8 +1639,8 @@
       }
     },
     "requests_keys": [
-      "nb_groups",
-      "get_empty_groups"
+      "get_empty_groups",
+      "nb_groups"
     ]
   },
   {
@@ -1828,8 +1694,8 @@
     },
     "requests_keys": [
       "nb_domain_admins",
-      "nb_enabled_accounts",
-      "password_last_change"
+      "password_last_change",
+      "nb_enabled_accounts"
     ]
   },
   {
@@ -1947,12 +1813,6 @@
         "code_map": {
           "percentage_superior": "def percentage_superior(req, base, criticity=1, percentage=0, presence=False):\n    if req is None:\n        return -1\n    if base is None:\n        return -1\n    if len(base) == 0:\n        return -1\n\n    if len(base) and len(req) / len(base) > percentage:\n        return criticity\n\n    if presence:\n        if len(req) > 0:\n            return criticity + 1\n    return 5"
         }
-      },
-      "/Users/steverassinot/Repos/AD_Miner/urllib/parse/__init__.py": {
-        "imported_elements": [
-          "quote"
-        ],
-        "code_map": {}
       }
     },
     "requests_keys": [
@@ -2011,8 +1871,8 @@
     },
     "requests_keys": [
       "user_password_never_expires",
-      "nb_domain_admins",
-      "nb_enabled_accounts"
+      "nb_enabled_accounts",
+      "nb_domain_admins"
     ]
   },
   {
@@ -2085,13 +1945,6 @@
           "Control": "class Control:\n    \"\"\"Every control should inheritate from this class.\n    It contains requests results and define essential structure.\"\"\"\n\n    def __init__(self, arguments, requests_results) -> None:\n        self.arguments = arguments\n        self.requests_results = requests_results\n        self.title = \"\"\n        self.description = \"\"\n        self.interpretation = \"\"\n        self.risk = \"\"\n        self.poa = \"\"\n\n    def run(self):\n        error_message = \"Your control \" + str(self)\n        error_message += \" should have a run() function defined.\"\n        raise NotImplementedError(error_message)\n\n    def get_rating(self) -> int:\n        error_message = \"Your control \" + str(self)\n        error_message += \" should have a get_rating() function defined.\"\n        raise NotImplementedError(error_message)\n\n    def get_dico_description(self) -> dict:\n        self.dico_description: dict[str, str] = {\n            \"title\": self.title,\n            \"description\": self.description,\n            \"interpretation\": self.interpretation,\n            \"risk\": self.risk,\n            \"poa\": self.poa,\n        }\n        return self.dico_description"
         }
       },
-      "/Users/steverassinot/Repos/AD_Miner/ad_miner/sources/modules/__init__.py": {
-        "imported_elements": [
-          "logger",
-          "generic_computing"
-        ],
-        "code_map": {}
-      },
       "ad_miner/sources/modules/page_class.py": {
         "imported_elements": [
           "Page"
@@ -2115,40 +1968,16 @@
         "code_map": {
           "Graph": "class Graph:\n    def __init__(self, template=\"graph\", path_limit=80000):\n        self.template_base_path = HTML_DIRECTORY / \"components/graph/\"\n        self.template = template\n        self.paths = []\n        self.nodes = {}\n        self.relations = []\n        self.relations_hashes = {}\n        self.path_limit = path_limit\n        self.ghost_computer = {}\n        self.ghost_user = {}\n        self.dc_computer = {}\n        self.user_da = {}\n        self.group_da = {}\n        self.enabled_users = {}\n        self.kerberoastable_users = {}\n        self.disabled_users_dict = {}\n\n    def addPath(self, path):\n        self.paths.append(path)\n\n    def setPaths(self, paths):\n        self.paths = paths\n\n    def addGhostComputers(self, ghost_computer):\n        self.ghost_computer = ghost_computer\n\n    def addGhostUsers(self, ghost_user):\n        self.ghost_user = ghost_user\n\n    def addDCComputers(self, dc_computer):\n        self.dc_computer = dc_computer\n\n    def addUserDA(self, user_da):\n        self.user_da = user_da\n\n    def addGroupDA(self, group_da):\n        self.group_da = group_da\n\n    def addDisabledUsers(self, disabled_users):\n        self.disabled_users_dict = {}\n        for d in disabled_users:\n            self.disabled_users_dict[d[\"name\"]] = True\n\n    def addKerberoastableUsers(self, kerberoastable_users):\n        self.kerberoastable_users = kerberoastable_users\n\n    def render(self, page_f):\n\n        # Write header\n        with open(\n            self.template_base_path / (self.template + \"_header.html\"), \"r\"\n        ) as header_f:\n            html_header = header_f.read()\n            page_f.write(html_header)\n\n        for index, path in enumerate(self.paths):\n            for i in range(len(path.nodes)):\n\n                node = path.nodes[i]\n\n                # Compute node style\n                if i == 0:\n                    node_position = \"start\"\n                elif i == len(path.nodes) - 1:\n                    node_position = \"end\"\n                else:\n                    node_position = \"intermediate\"\n\n                # Add new labels here. A corresponding svg icon should be defined\n                # dico_icon in the icon.js file.\n                list_labels = [\n                    \"User\",\n                    \"Foreignsecurityprincipal\",\n                    \"GPO\",\n                    \"Computer\",\n                    \"OU\",\n                    \"Group\",\n                    \"Domain\",\n                    \"ADLocalGroup\",\n                    \"Container\",\n                    \"Unknown\",\n                    \"Group_cluster\",\n                    \"Device\",\n                    \"AZTenant\",\n                    \"AZRole\",\n                ]\n\n                if node.labels in list_labels:\n                    label_instance = node.labels\n                elif path.nodes[i].labels[2:] in list_labels:\n                    label_instance = node.labels[2:]\n                else:\n                    label_instance = \"Unknown\"\n\n                node_attributes = []\n\n                # Add DA icon if node is DC, DA or Domain\n                if (\n                    (\n                        label_instance == \"Computer\"\n                        and self.dc_computer.get(node.name, False)\n                    )\n                    or (label_instance == \"User\" and self.user_da.get(node.name, False))\n                    or (\n                        label_instance == \"Group\"\n                        and self.group_da.get(node.name, False)\n                    )\n                    or label_instance == \"Domain\"\n                ):\n                    node_attributes.append(\"da\")\n\n                # Add ghost icon if ghost\n                if (\n                    label_instance == \"User\" and self.ghost_user.get(node.name, False)\n                ) or (\n                    label_instance == \"Computer\"\n                    and self.ghost_computer.get(node.name, False)\n                ):\n                    node_attributes.append(\"ghost\")\n\n                if label_instance == \"User\" and self.disabled_users_dict.get(\n                    node.name, False\n                ):\n                    node_attributes.append(\"disabled\")\n\n                if label_instance == \"User\" and self.kerberoastable_users.get(\n                    node.name, False\n                ):\n                    node_attributes.append(\"kerberoastable\")\n\n                # New nodes attributes that should be added to the node icon\n                # should be added here to the node_attributes list.\n                # A corresponding svg icon should the be added to the\n                # dico_icon in icon.js\n\n                if not self.nodes.get(path.nodes[i].id):\n\n                    final_graph_node = {\n                        \"id\": path.nodes[i].id,\n                        \"label\": path.nodes[i].name,\n                        \"domain\": path.nodes[i].domain,\n                        \"shape\": \"image\",\n                        \"instance\": label_instance,\n                        \"position\": node_position,\n                        \"attributes\": node_attributes,\n                    }\n                    self.nodes[path.nodes[i].id] = final_graph_node\n\n                if i != 0:\n                    relation = {\n                        \"from\": path.nodes[i - 1].id,\n                        \"to\": path.nodes[i].id,\n                        \"label\": path.nodes[i - 1].relation_type,\n                    }\n\n                    # Avoid relation duplicated to keep graph clean\n                    # Use hashes list for better performance\n                    hash_rel = hash(\n                        str(relation[\"from\"])\n                        + str(relation[\"to\"])\n                        + str(relation[\"label\"])\n                    )\n                    if not self.relations_hashes.get(hash_rel):\n                        self.relations.append(relation)\n                        self.relations_hashes[hash_rel] = True\n\n        nodes = list(self.nodes.values())\n        for n in nodes:  # Sanitize None values (otherwise it creates a bug in JS)\n            if n[\"label\"] == None:\n                n[\"label\"] = \"???\"\n        page_f.write(f'<script type=\"text/javascript\">window.data_nodes = {nodes};\\n')\n        page_f.write(f\"window.data_edges = {self.relations};</script>\\n\")"
         }
-      },
-      "ad_miner/sources/modules/common_analysis.py": {
-        "imported_elements": [
-          "("
-        ],
-        "code_map": {}
-      },
-      "/Users/steverassinot/Repos/AD_Miner/os/path/__init__.py": {
-        "imported_elements": [
-          "sep"
-        ],
-        "code_map": {}
-      },
-      "/Users/steverassinot/Repos/AD_Miner/tqdm/__init__.py": {
-        "imported_elements": [
-          "tqdm"
-        ],
-        "code_map": {}
-      },
-      "/Users/steverassinot/Repos/AD_Miner/urllib/parse/__init__.py": {
-        "imported_elements": [
-          "quote"
-        ],
-        "code_map": {}
       }
     },
     "requests_keys": [
+      "unpriv_users_to_GPO_user_not_enforced",
       "unpriv_users_to_GPO_computer_not_enforced",
+      "unpriv_users_to_GPO",
       "unpriv_users_to_GPO_user_enforced",
       "unpriv_users_to_GPO_init",
-      "admin_list",
-      "unpriv_users_to_GPO_user_not_enforced",
-      "unpriv_users_to_GPO",
-      "users_admin_on_computers"
+      "users_admin_on_computers",
+      "admin_list"
     ]
   },
   {
@@ -2198,31 +2027,13 @@
         "code_map": {
           "grid_data_stringify": "def grid_data_stringify(raw_data: dict) -> str:\n    \"\"\"\n    Transform a dict to a string for the grid formating. This is a dumb fix for the sorting with hyperlink.\n    dict format :\n    {\n        \"link\",\n        \"value\",\n        \"before_link\"\n    }\n    \"\"\"\n    link = raw_data['link'].replace(sep, '_').replace('/', '_')\n    try:\n        return f\"{raw_data['before_link']} <a class=\\\"grid-link\\\" href='{link}'>{raw_data['value']}&nbsp;<i class='bi bi-box-arrow-up-right' style='color: #0969da;'></i></a>\"\n    except KeyError:\n        return f\"<a class=\\\"grid-link\\\" href='{link}'>{raw_data['value']}&nbsp;<i class='bi bi-box-arrow-up-right' style='color: #0969da;'></i></a>\""
         }
-      },
-      "ad_miner/sources/modules/common_analysis.py": {
-        "imported_elements": [
-          "("
-        ],
-        "code_map": {}
-      },
-      "/Users/steverassinot/Repos/AD_Miner/urllib/parse/__init__.py": {
-        "imported_elements": [
-          "quote"
-        ],
-        "code_map": {}
-      },
-      "/Users/steverassinot/Repos/AD_Miner/tqdm/__init__.py": {
-        "imported_elements": [
-          "tqdm"
-        ],
-        "code_map": {}
       }
     },
     "requests_keys": [
-      "set_containsdc",
+      "set_containsda",
       "vulnerable_OU_impact",
       "compromise_paths_of_OUs",
-      "set_containsda"
+      "set_containsdc"
     ]
   },
   {
@@ -2286,13 +2097,6 @@
           "Control": "class Control:\n    \"\"\"Every control should inheritate from this class.\n    It contains requests results and define essential structure.\"\"\"\n\n    def __init__(self, arguments, requests_results) -> None:\n        self.arguments = arguments\n        self.requests_results = requests_results\n        self.title = \"\"\n        self.description = \"\"\n        self.interpretation = \"\"\n        self.risk = \"\"\n        self.poa = \"\"\n\n    def run(self):\n        error_message = \"Your control \" + str(self)\n        error_message += \" should have a run() function defined.\"\n        raise NotImplementedError(error_message)\n\n    def get_rating(self) -> int:\n        error_message = \"Your control \" + str(self)\n        error_message += \" should have a get_rating() function defined.\"\n        raise NotImplementedError(error_message)\n\n    def get_dico_description(self) -> dict:\n        self.dico_description: dict[str, str] = {\n            \"title\": self.title,\n            \"description\": self.description,\n            \"interpretation\": self.interpretation,\n            \"risk\": self.risk,\n            \"poa\": self.poa,\n        }\n        return self.dico_description"
         }
       },
-      "/Users/steverassinot/Repos/AD_Miner/ad_miner/sources/modules/__init__.py": {
-        "imported_elements": [
-          "logger",
-          "generic_computing"
-        ],
-        "code_map": {}
-      },
       "ad_miner/sources/modules/page_class.py": {
         "imported_elements": [
           "Page"
@@ -2340,41 +2144,23 @@
         "code_map": {
           "grid_data_stringify": "def grid_data_stringify(raw_data: dict) -> str:\n    \"\"\"\n    Transform a dict to a string for the grid formating. This is a dumb fix for the sorting with hyperlink.\n    dict format :\n    {\n        \"link\",\n        \"value\",\n        \"before_link\"\n    }\n    \"\"\"\n    link = raw_data['link'].replace(sep, '_').replace('/', '_')\n    try:\n        return f\"{raw_data['before_link']} <a class=\\\"grid-link\\\" href='{link}'>{raw_data['value']}&nbsp;<i class='bi bi-box-arrow-up-right' style='color: #0969da;'></i></a>\"\n    except KeyError:\n        return f\"<a class=\\\"grid-link\\\" href='{link}'>{raw_data['value']}&nbsp;<i class='bi bi-box-arrow-up-right' style='color: #0969da;'></i></a>\""
         }
-      },
-      "ad_miner/sources/modules/common_analysis.py": {
-        "imported_elements": [
-          "("
-        ],
-        "code_map": {}
-      },
-      "/Users/steverassinot/Repos/AD_Miner/urllib/parse/__init__.py": {
-        "imported_elements": [
-          "quote"
-        ],
-        "code_map": {}
-      },
-      "/Users/steverassinot/Repos/AD_Miner/tqdm/__init__.py": {
-        "imported_elements": [
-          "tqdm"
-        ],
-        "code_map": {}
       }
     },
     "requests_keys": [
-      "dico_ghost_computer",
-      "nb_enabled_accounts",
-      "dico_da_group",
-      "password_last_change",
-      "admin_list",
       "dico_user_da",
-      "get_users_direct_admin",
-      "get_groups_linked_admin_group",
-      "nb_kerberoastable_accounts",
       "get_computers_linked_admin_group",
-      "dico_dc_computer",
+      "dico_da_group",
+      "users_admin_on_computers",
+      "dico_ghost_computer",
       "dico_ghost_user",
+      "nb_kerberoastable_accounts",
+      "get_users_direct_admin",
       "get_users_linked_admin_group",
-      "users_admin_on_computers"
+      "get_groups_linked_admin_group",
+      "dico_dc_computer",
+      "password_last_change",
+      "nb_enabled_accounts",
+      "admin_list"
     ]
   },
   {
@@ -2432,12 +2218,6 @@
         "code_map": {
           "presence_of": "def presence_of(req, criticity=1, threshold=0):\n    if req is None:\n        return -1\n    if len(req) > threshold:\n        return criticity\n    return 5"
         }
-      },
-      "/Users/steverassinot/Repos/AD_Miner/urllib/parse/__init__.py": {
-        "imported_elements": [
-          "quote"
-        ],
-        "code_map": {}
       }
     },
     "requests_keys": [
@@ -2476,12 +2256,6 @@
           "Grid": "class Grid:\n    def __init__(self, title, template=\"grid\", classes=\"thead-light\"):\n        self.template_base_path = HTML_DIRECTORY / \"components/grid/\"\n        self.title = title\n        self.template = template\n        self.headers = []\n        self.data = \"\"\n        self.class_css = classes\n\n    def addheader(self, header):\n        self.headers.append(header)\n\n    def setheaders(self, header):\n        self.headers = header\n\n    def getHeaders(self):\n        return self.headers\n\n    def setData(self, data):\n        self.data = data\n\n    def render(self, page_f):\n        with open(self.template_base_path / (self.template + \"_template.html\"), \"r\") as grid_template:\n            # Grid data that will be inserted in the template\n            textToInsert = \"var columnDefs = [\"\n            for header in self.headers:\n                textToInsert += \"\"\"{\n                    field:\\\"%s\\\",\n                    cellRenderer: function(params) {\n                        if (typeof params.data[params.column.colId] === 'object') {\n                            if (params.data[params.column.colId].value == \\\"0\\\") {\n                                return params.data[params.column.colId].value;\n                            }\n                            if (params.data[params.column.colId].link == 'FALSE_LINK') {\n                                params.data[params.column.colId] = '<p>' + params.data[params.column.colId].value + '</p>';\n                                return params.data[params.column.colId];\n                            }\n                            if (params.data[params.column.colId].link != null) {\n                                if (params.data[params.column.colId].before_link != null) {\n                                    var prepend = params.data[params.column.colId].before_link;\n                                }\n                                else {\n                                    var prepend = \"\";\n                                }\n                                params.data[params.column.colId] = prepend + '<a onMouseOver=\"this.style.color=#99c3ff\" onMouseOut=\"this.style.color=#000\" href=\"' + params.data[params.column.colId].link + '\">'+ params.data[params.column.colId].value + '</a>';\n                                return params.data[params.column.colId];\n                            }\n                            return params.data[params.column.colId];\n                        }\n                        else {\n                            return params.value;\n                        }\n                    },\n                },\"\"\" % (\n                    header\n                )\n\n            textToInsert = textToInsert + \"];\\nvar rowData=%s;\\n\" % (self.data)\n\n            template_contents = grid_template.read()\n\n            new_contents = template_contents.replace(\"// DATA PLACEHOLDER\", textToInsert)\n\n            page_f.write(new_contents)"
         }
       },
-      "/Users/steverassinot/Repos/AD_Miner/ad_miner/sources/modules/__init__.py": {
-        "imported_elements": [
-          "generic_formating"
-        ],
-        "code_map": {}
-      },
       "ad_miner/sources/modules/common_analysis.py": {
         "imported_elements": [
           "hasPathToDA"
@@ -2492,9 +2266,9 @@
       }
     },
     "requests_keys": [
+      "servers_with_most_paths",
       "users_admin_on_servers_list",
       "users_admin_on_servers_all_data",
-      "servers_with_most_paths",
       "users_admin_on_servers"
     ]
   },
@@ -2546,12 +2320,6 @@
         "code_map": {
           "containsDAs": "def containsDAs(req, criticity=1):\n    if req is None:\n        return -1\n\n    for object in req:\n        if object.get(\"is_Domain_Admin\"):\n            if object[\"is_Domain_Admin\"] == True:\n                return criticity\n        # if object.get(\"is_da\"):\n        #     if object[\"is_da\"] == True:\n        #         return criticity\n\n    if len(req) > 0:\n        return criticity + 1\n\n    return 5"
         }
-      },
-      "/Users/steverassinot/Repos/AD_Miner/urllib/parse/__init__.py": {
-        "imported_elements": [
-          "quote"
-        ],
-        "code_map": {}
       }
     },
     "requests_keys": [
@@ -2590,13 +2358,6 @@
           "Grid": "class Grid:\n    def __init__(self, title, template=\"grid\", classes=\"thead-light\"):\n        self.template_base_path = HTML_DIRECTORY / \"components/grid/\"\n        self.title = title\n        self.template = template\n        self.headers = []\n        self.data = \"\"\n        self.class_css = classes\n\n    def addheader(self, header):\n        self.headers.append(header)\n\n    def setheaders(self, header):\n        self.headers = header\n\n    def getHeaders(self):\n        return self.headers\n\n    def setData(self, data):\n        self.data = data\n\n    def render(self, page_f):\n        with open(self.template_base_path / (self.template + \"_template.html\"), \"r\") as grid_template:\n            # Grid data that will be inserted in the template\n            textToInsert = \"var columnDefs = [\"\n            for header in self.headers:\n                textToInsert += \"\"\"{\n                    field:\\\"%s\\\",\n                    cellRenderer: function(params) {\n                        if (typeof params.data[params.column.colId] === 'object') {\n                            if (params.data[params.column.colId].value == \\\"0\\\") {\n                                return params.data[params.column.colId].value;\n                            }\n                            if (params.data[params.column.colId].link == 'FALSE_LINK') {\n                                params.data[params.column.colId] = '<p>' + params.data[params.column.colId].value + '</p>';\n                                return params.data[params.column.colId];\n                            }\n                            if (params.data[params.column.colId].link != null) {\n                                if (params.data[params.column.colId].before_link != null) {\n                                    var prepend = params.data[params.column.colId].before_link;\n                                }\n                                else {\n                                    var prepend = \"\";\n                                }\n                                params.data[params.column.colId] = prepend + '<a onMouseOver=\"this.style.color=#99c3ff\" onMouseOut=\"this.style.color=#000\" href=\"' + params.data[params.column.colId].link + '\">'+ params.data[params.column.colId].value + '</a>';\n                                return params.data[params.column.colId];\n                            }\n                            return params.data[params.column.colId];\n                        }\n                        else {\n                            return params.value;\n                        }\n                    },\n                },\"\"\" % (\n                    header\n                )\n\n            textToInsert = textToInsert + \"];\\nvar rowData=%s;\\n\" % (self.data)\n\n            template_contents = grid_template.read()\n\n            new_contents = template_contents.replace(\"// DATA PLACEHOLDER\", textToInsert)\n\n            page_f.write(new_contents)"
         }
       },
-      "/Users/steverassinot/Repos/AD_Miner/ad_miner/sources/modules/__init__.py": {
-        "imported_elements": [
-          "generic_formating",
-          ""
-        ],
-        "code_map": {}
-      },
       "ad_miner/sources/modules/utils.py": {
         "imported_elements": [
           "grid_data_stringify"
@@ -2604,40 +2365,22 @@
         "code_map": {
           "grid_data_stringify": "def grid_data_stringify(raw_data: dict) -> str:\n    \"\"\"\n    Transform a dict to a string for the grid formating. This is a dumb fix for the sorting with hyperlink.\n    dict format :\n    {\n        \"link\",\n        \"value\",\n        \"before_link\"\n    }\n    \"\"\"\n    link = raw_data['link'].replace(sep, '_').replace('/', '_')\n    try:\n        return f\"{raw_data['before_link']} <a class=\\\"grid-link\\\" href='{link}'>{raw_data['value']}&nbsp;<i class='bi bi-box-arrow-up-right' style='color: #0969da;'></i></a>\"\n    except KeyError:\n        return f\"<a class=\\\"grid-link\\\" href='{link}'>{raw_data['value']}&nbsp;<i class='bi bi-box-arrow-up-right' style='color: #0969da;'></i></a>\""
         }
-      },
-      "ad_miner/sources/modules/common_analysis.py": {
-        "imported_elements": [
-          "("
-        ],
-        "code_map": {}
-      },
-      "/Users/steverassinot/Repos/AD_Miner/urllib/parse/__init__.py": {
-        "imported_elements": [
-          "quote"
-        ],
-        "code_map": {}
-      },
-      "/Users/steverassinot/Repos/AD_Miner/tqdm/__init__.py": {
-        "imported_elements": [
-          "tqdm"
-        ],
-        "code_map": {}
       }
     },
     "requests_keys": [
-      "dico_is_user_admin_on_computer",
-      "admin_list",
-      "computers_admin_on_computers",
-      "dico_computers_to_da",
-      "dico_groups_to_da",
-      "domains_to_domain_admin",
-      "anomaly_acl_1",
-      "users_admin_on_computers",
-      "dico_users_to_da",
-      "dico_ou_to_da",
-      "dico_gpo_to_da",
       "anomaly_acl_2",
-      "dico_paths_computers_to_DA"
+      "admin_list",
+      "dico_computers_to_da",
+      "dico_gpo_to_da",
+      "dico_users_to_da",
+      "computers_admin_on_computers",
+      "users_admin_on_computers",
+      "anomaly_acl_1",
+      "dico_ou_to_da",
+      "domains_to_domain_admin",
+      "dico_groups_to_da",
+      "dico_paths_computers_to_DA",
+      "dico_is_user_admin_on_computer"
     ]
   },
   {
@@ -2690,8 +2433,8 @@
       }
     },
     "requests_keys": [
-      "da_to_da",
       "objects_to_domain_admin",
+      "da_to_da",
       "objects_to_dcsync"
     ]
   },

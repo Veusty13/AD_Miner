@@ -64,11 +64,11 @@ def get_import_map(
             object_code_map = {}
         else:
             object_code_map = extract_objects_code(code, imported)
-
-        full_map[path.as_posix()] = {
-            "imported_elements": imported,
-            "code_map": object_code_map,
-        }
+        if object_code_map:
+            full_map[path.as_posix()] = {
+                "imported_elements": imported,
+                "code_map": object_code_map,
+            }
 
     return full_map
 
@@ -198,6 +198,7 @@ class ControlInfoGatherer:
             )
             raise e
 
+class Neo4jGraph
 
 if __name__ == "__main__":
 
