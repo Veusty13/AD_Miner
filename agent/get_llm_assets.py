@@ -198,7 +198,6 @@ class ControlInfoGatherer:
             )
             raise e
 
-class Neo4jGraph
 
 if __name__ == "__main__":
 
