@@ -1,11 +1,17 @@
-from fastapi import FastAPI, Path, HTTPException
-from typing import List, Annotated, Any
+from fastapi import FastAPI, Path, Body
+from typing import List, Annotated
 from utils import (
     ControlInfo,
     GetListControlsOutput,
     RequestResult,
+    DefaultRequestResult,
+    LLMTask,
+    PROMPT_TEMPLATES,
     read_all_controls_info,
-    read_all_requests_results,
+    read_single_control_info,
+    read_single_request_result,
+    generate_llm_prompt,
+    normalize_path,
 )
 
 app = FastAPI()
@@ -25,29 +31,35 @@ async def get_list_controls() -> List[GetListControlsOutput]:
 
 @app.get("/controls/information/{control_title}")
 async def get_control_info(control_title: Annotated[str, Path()]) -> ControlInfo:
-    all_controls_info: List[ControlInfo] = read_all_controls_info()
-    try:
-        output: ControlInfo = [
-            control_info
-            for control_info in all_controls_info
-            if control_info.title == control_title
-        ][0]
-    except IndexError:
-        raise HTTPException(status_code=404, detail="Control information not found")
+    output: ControlInfo = read_single_control_info(control_title=control_title)
     return output
 
 
 @app.get("/controls/information/requests/{request_key}")
 async def get_requests_control(
     request_key: Annotated[str, Path()],
-) -> RequestResult | Any:
-    all_requests_results: List[RequestResult | Any] = read_all_requests_results()
-    try:
-        output = [
-            request_result
-            for request_result in all_requests_results
-            if request_result.request_key == request_key
-        ][0]
-    except IndexError:
-        raise HTTPException(status_code=404, detail="Request result not found")
+) -> RequestResult | DefaultRequestResult:
+    output: RequestResult | DefaultRequestResult = read_single_request_result(
+        request_key=request_key
+    )
     return output
+
+
+@app.post("/llm/ask/{task}")
+async def ask_llm(
+    task: Annotated[LLMTask, Path()], control_title: Annotated[str, Body()]
+) -> str:
+    control_info: ControlInfo = read_single_control_info(control_title=control_title)
+    request_keys: List[str] = control_info.requests_keys
+    requests_results: List[RequestResult | DefaultRequestResult] = [
+        read_single_request_result(request_key=request_key)
+        for request_key in request_keys
+    ]
+    prompt: str = generate_llm_prompt(
+        task=task,
+        control_info=control_info.model_dump(),
+        requests_results=[
+            request_result.model_dump() for request_result in requests_results
+        ],
+    )
+    return prompt

@@ -2,6 +2,9 @@ from pydantic import BaseModel
 from typing import List, Dict, Any
 from enum import Enum
 import json
+import math
+import re
+from fastapi import HTTPException
 
 ALL_CONTROLS_INFO_JSON = "agent/llm_assets/all_controls_info.json"
 ALL_REQUESTS_RESULTS_JSON = "agent/llm_assets/requests_results.json"
@@ -55,6 +58,71 @@ class DefaultRequestResult(BaseModel):
     result: Any
 
 
+class LLMTask(Enum):
+    methodology = "methodology"
+    diagnose = "diagnose"
+    remediation = "remediation"
+
+
+PROMPT_TEMPLATES = {
+    LLMTask.methodology: """
+Tu es un expert en cybersécurité spécialisé en Active Directory. Explique de manière claire la **méthodologie** utilisée dans le contrôle suivant, issu du projet AD MINER.
+
+Les informations du contrôle sont :
+
+{control_info}
+
+Voici également les résultats des requêtes Cypher associées :
+
+{requests_results}
+
+Détaille :
+- Quel est le but du contrôle ?
+- Quelles entités Active Directory sont impliquées ?
+- Comment les requêtes Cypher analysent-elles le graphe ?
+- Quelle logique de détection est utilisée ?
+Utilise un vocabulaire simple mais précis, adapté à un analyste sécurité.
+""",
+    LLMTask.diagnose: """
+Tu es un analyste cybersécurité chargé de diagnostiquer une infrastructure Active Directory à partir des résultats d'un contrôle automatisé AD MINER.
+
+Les informations du contrôle sont :
+
+{control_info}
+
+Voici également les résultats des requêtes Cypher associées :
+
+{requests_results}
+
+À partir de ces éléments, produis un **diagnostic clair** :
+- Y a-t-il des failles ou mauvaises configurations détectées ?
+- Quels objets ou relations Active Directory sont concernés ?
+- Quelle est la gravité potentielle ?
+- Quelles sont les conséquences possibles pour la sécurité ?
+Sois rigoureux et précis, comme si tu rédigeais un rapport d'audit professionnel.
+""",
+    LLMTask.remediation: """
+Tu es consultant en cybersécurité. Propose une **remédiation concrète** suite à l'exécution du contrôle suivant sur une infrastructure Active Directory.
+
+Les informations du contrôle sont :
+
+{control_info}
+
+Voici également les résultats des requêtes Cypher associées :
+
+{requests_results}
+
+Ta tâche :
+- Identifier les faiblesses ou problèmes mis en évidence.
+- Proposer une ou plusieurs actions correctives précises.
+- Donner des exemples de commandes PowerShell ou de bonnes pratiques de configuration si pertinent.
+- Ajouter des recommandations pour la prévention à long terme.
+
+Le style doit être clair, pragmatique, et directement applicable en entreprise.
+""",
+}
+
+
 def read_all_controls_info() -> List[ControlInfo]:
     try:
         with open(ALL_CONTROLS_INFO_JSON, "r") as file:
@@ -83,3 +151,92 @@ def read_all_requests_results() -> List[RequestResult | DefaultRequestResult]:
         print(f"Could not find {ALL_REQUESTS_RESULTS_JSON}")
         raise e
     return all_requests_results
+
+
+def read_single_control_info(control_title: str) -> ControlInfo:
+    all_controls_info: List[ControlInfo] = read_all_controls_info()
+    try:
+        single_control_info: ControlInfo = [
+            control_info
+            for control_info in all_controls_info
+            if control_info.title == control_title
+        ][0]
+    except IndexError:
+        raise HTTPException(status_code=404, detail="Control information not found")
+    return single_control_info
+
+
+def read_single_request_result(
+    request_key: str,
+) -> RequestResult | DefaultRequestResult:
+    all_requests_results: List[RequestResult | DefaultRequestResult] = (
+        read_all_requests_results()
+    )
+    try:
+        output = [
+            request_result
+            for request_result in all_requests_results
+            if request_result.request_key == request_key
+        ][0]
+    except IndexError:
+        raise HTTPException(status_code=404, detail="Request result not found")
+    normalized_output = normalize_path(output)
+    return normalized_output
+
+
+def normalize_path(
+    request_result: RequestResult | DefaultRequestResult,
+) -> RequestResult | DefaultRequestResult:
+    request_result_to_process = request_result.model_copy()
+    try:
+        if not isinstance(request_result_to_process, RequestResult):
+            return request_result
+        result = request_result_to_process.result
+        is_a_list_of_path = math.prod(
+            [element["__class__"] == "Path" for element in result]
+        )
+        if not is_a_list_of_path:
+            return request_result
+        all_nodes = []
+        all_edges = []
+        keys_node = ["id", "labels", "name", "domain", "tenant_id"]
+        keys_edge = ["id", "relation_type"]
+        for path in result:
+            raw_nodes_in_path = path["nodes"]
+            edges_in_path = []
+            for node in raw_nodes_in_path:
+                candidate_node = {k: v for k, v in node.items() if k in keys_node}
+                if candidate_node not in all_nodes:
+                    all_nodes.append(candidate_node)
+                edges_in_path.append({k: v for k, v in node.items() if k in keys_edge})
+            all_edges.append(edges_in_path)
+        normalized_path = {"nodes": all_nodes, "edges": all_edges}
+        request_result_to_process.result = normalized_path
+        return request_result_to_process
+    except Exception:
+        return request_result
+
+
+def generate_llm_prompt(
+    task: LLMTask,
+    control_info: dict,
+    requests_results: List[dict[str, Any]],
+) -> str:
+    def unescape(text: str) -> str:
+        return bytes(text, "utf-8").decode("unicode_escape")
+
+    def remove_html_tags(text: str) -> str:
+        return re.sub(r"<[^>]+>", "", text)
+
+    prompt_template = PROMPT_TEMPLATES[task]
+
+    formatted_prompt = unescape(
+        remove_html_tags(
+            prompt_template.format(
+                control_info=control_info,
+                requests_results=requests_results,
+            )
+        )
+    )
+
+    return formatted_prompt.strip()
