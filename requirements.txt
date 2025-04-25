@@ -3,3 +3,5 @@ numpy==2.1.1
 pytz==2022.7.1
 tqdm==4.66.4
 fastapi[standard]==0.115.12
+streamlit==1.44.1
+requests==2.32.3

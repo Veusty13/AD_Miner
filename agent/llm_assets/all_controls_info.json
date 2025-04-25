@@ -254,8 +254,8 @@
       }
     },
     "requests_keys": [
-      "objects_to_operators_member",
-      "objects_to_operators_groups"
+      "objects_to_operators_groups",
+      "objects_to_operators_member"
     ]
   },
   {
@@ -526,8 +526,8 @@
       }
     },
     "requests_keys": [
-      "computers_not_connected_since",
-      "nb_computers"
+      "nb_computers",
+      "computers_not_connected_since"
     ]
   },
   {
@@ -581,8 +581,8 @@
       }
     },
     "requests_keys": [
-      "graph_rbcd_to_da",
-      "graph_rbcd"
+      "graph_rbcd",
+      "graph_rbcd_to_da"
     ]
   },
   {
@@ -627,8 +627,8 @@
       }
     },
     "requests_keys": [
-      "users_admin_on_computers",
-      "has_sid_history"
+      "has_sid_history",
+      "users_admin_on_computers"
     ]
   },
   {
@@ -726,8 +726,8 @@
       }
     },
     "requests_keys": [
-      "admin_list",
       "dormant_accounts",
+      "admin_list",
       "nb_enabled_accounts"
     ]
   },
@@ -782,12 +782,12 @@
       }
     },
     "requests_keys": [
-      "dico_ghost_computer",
-      "dico_ghost_user",
-      "dico_dc_computer",
-      "dom_admin_on_non_dc",
-      "dico_da_group",
       "dico_user_da",
+      "dico_da_group",
+      "dico_ghost_user",
+      "dom_admin_on_non_dc",
+      "dico_ghost_computer",
+      "dico_dc_computer",
       "dico_is_kerberoastable"
     ]
   },
@@ -917,12 +917,12 @@
       }
     },
     "requests_keys": [
-      "dico_ghost_computer",
+      "dico_user_da",
+      "dico_da_group",
       "dico_ghost_user",
       "dc_impersonation",
+      "dico_ghost_computer",
       "dico_dc_computer",
-      "dico_da_group",
-      "dico_user_da",
       "dico_is_kerberoastable"
     ]
   },
@@ -1272,12 +1272,12 @@
       }
     },
     "requests_keys": [
-      "dico_ghost_computer",
-      "dico_ghost_user",
-      "dico_dc_computer",
       "cross_domain_local_admins",
-      "dico_da_group",
       "dico_user_da",
+      "dico_da_group",
+      "dico_ghost_user",
+      "dico_ghost_computer",
+      "dico_dc_computer",
       "cross_domain_domain_admins",
       "dico_is_kerberoastable"
     ]
@@ -1334,10 +1334,10 @@
     },
     "requests_keys": [
       "users_to_domain_admin",
-      "domains",
       "objects_to_domain_admin",
-      "nb_domain_collected",
       "domains_to_domain_admin",
+      "nb_domain_collected",
+      "domains",
       "groups_to_domain_admin",
       "computers_to_domain_admin"
     ]
@@ -1553,10 +1553,10 @@
     },
     "requests_keys": [
       "nb_domain_admins",
-      "set_dcsync2",
       "objects_to_dcsync",
-      "dcsync_list",
-      "set_dcsync1"
+      "set_dcsync1",
+      "set_dcsync2",
+      "dcsync_list"
     ]
   },
   {
@@ -1601,8 +1601,8 @@
       }
     },
     "requests_keys": [
-      "nb_computers",
-      "nb_computers_laps"
+      "nb_computers_laps",
+      "nb_computers"
     ]
   },
   {
@@ -1971,13 +1971,13 @@
       }
     },
     "requests_keys": [
+      "unpriv_users_to_GPO_computer_not_enforced",
       "unpriv_users_to_GPO_init",
       "unpriv_users_to_GPO_user_not_enforced",
-      "unpriv_users_to_GPO_computer_not_enforced",
-      "unpriv_users_to_GPO",
-      "admin_list",
+      "unpriv_users_to_GPO_user_enforced",
       "users_admin_on_computers",
-      "unpriv_users_to_GPO_user_enforced"
+      "unpriv_users_to_GPO",
+      "admin_list"
     ]
   },
   {
@@ -2030,10 +2030,10 @@
       }
     },
     "requests_keys": [
-      "compromise_paths_of_OUs",
-      "set_containsda",
       "set_containsdc",
-      "vulnerable_OU_impact"
+      "vulnerable_OU_impact",
+      "set_containsda",
+      "compromise_paths_of_OUs"
     ]
   },
   {
@@ -2147,20 +2147,20 @@
       }
     },
     "requests_keys": [
-      "get_users_linked_admin_group",
-      "password_last_change",
-      "dico_ghost_computer",
-      "get_computers_linked_admin_group",
-      "dico_ghost_user",
-      "get_groups_linked_admin_group",
       "get_users_direct_admin",
+      "dico_user_da",
+      "dico_da_group",
+      "password_last_change",
+      "dico_ghost_user",
+      "get_computers_linked_admin_group",
+      "dico_ghost_computer",
       "dico_dc_computer",
       "admin_list",
       "nb_kerberoastable_accounts",
-      "dico_da_group",
+      "get_groups_linked_admin_group",
       "users_admin_on_computers",
-      "nb_enabled_accounts",
-      "dico_user_da"
+      "get_users_linked_admin_group",
+      "nb_enabled_accounts"
     ]
   },
   {
@@ -2266,9 +2266,9 @@
       }
     },
     "requests_keys": [
-      "servers_with_most_paths",
-      "users_admin_on_servers_all_data",
       "users_admin_on_servers",
+      "users_admin_on_servers_all_data",
+      "servers_with_most_paths",
       "users_admin_on_servers_list"
     ]
   },
@@ -2368,19 +2368,19 @@
       }
     },
     "requests_keys": [
-      "dico_computers_to_da",
-      "dico_groups_to_da",
-      "anomaly_acl_1",
       "computers_admin_on_computers",
       "domains_to_domain_admin",
-      "admin_list",
-      "anomaly_acl_2",
-      "dico_paths_computers_to_DA",
+      "dico_groups_to_da",
+      "dico_ou_to_da",
       "dico_is_user_admin_on_computer",
-      "users_admin_on_computers",
       "dico_users_to_da",
+      "dico_computers_to_da",
+      "admin_list",
       "dico_gpo_to_da",
-      "dico_ou_to_da"
+      "users_admin_on_computers",
+      "anomaly_acl_1",
+      "anomaly_acl_2",
+      "dico_paths_computers_to_DA"
     ]
   },
   {
@@ -2433,9 +2433,9 @@
       }
     },
     "requests_keys": [
-      "da_to_da",
+      "objects_to_dcsync",
       "objects_to_domain_admin",
-      "objects_to_dcsync"
+      "da_to_da"
     ]
   },
   {

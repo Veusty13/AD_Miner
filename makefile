@@ -4,5 +4,5 @@ run-audit :
 build-knowledge-data : 
 	python agent/get_llm_assets.py
 
-run-server :
-	fastapi dev agent/api/main.py
+run-app : 
+	fastapi dev agent/api/main.py & sleep 2 && streamlit run agent/front/streamlit_app.py

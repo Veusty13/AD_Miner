@@ -139,10 +139,10 @@
                 "relationType": "NTAuthStoreFor"
             },
             {
-                "relationType": "TrustedForNTAuth"
+                "relationType": "EnterpriseCAFor"
             },
             {
-                "relationType": "EnterpriseCAFor"
+                "relationType": "TrustedForNTAuth"
             },
             {
                 "relationType": "CanExtractDCSecrets"
@@ -1053,10 +1053,10 @@
                 "NTAuthStoreFor"
             ],
             [
-                "TrustedForNTAuth"
+                "EnterpriseCAFor"
             ],
             [
-                "EnterpriseCAFor"
+                "TrustedForNTAuth"
             ],
             [
                 "CanExtractDCSecrets"
@@ -21518,237 +21518,6 @@
                         "name": "DOMAIN ADMINS@ESSOS.LOCAL",
                         "domain": "ESSOS.LOCAL",
                         "tenant_id": null,
-                        "relation_type": "AllExtendedRights"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 266,
-                        "labels": "User",
-                        "name": "DAENERYS.TARGARYEN@ESSOS.LOCAL",
-                        "domain": "ESSOS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "MemberOf"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 694,
-                        "labels": "Group",
-                        "name": "ACROSSTHENARROWSEA@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "GenericAll"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 345,
-                        "labels": "Computer",
-                        "name": "KINGSLANDING.SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "DCSync"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 335,
-                        "labels": "Domain",
-                        "name": "SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "Contains"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 717,
-                        "labels": "Container",
-                        "name": "USERS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "Contains"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 340,
-                        "labels": "Group",
-                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "WriteDacl"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 341,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
-                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": ""
-                    }
-                ]
-            },
-            {
-                "__class__": "Path",
-                "nodes": [
-                    {
-                        "__class__": "Node",
-                        "id": 3,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@ESSOS.LOCAL",
-                        "domain": "ESSOS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "GenericWrite"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 266,
-                        "labels": "User",
-                        "name": "DAENERYS.TARGARYEN@ESSOS.LOCAL",
-                        "domain": "ESSOS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "MemberOf"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 694,
-                        "labels": "Group",
-                        "name": "ACROSSTHENARROWSEA@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "GenericAll"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 345,
-                        "labels": "Computer",
-                        "name": "KINGSLANDING.SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "GoldenCert"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 335,
-                        "labels": "Domain",
-                        "name": "SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "Contains"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 717,
-                        "labels": "Container",
-                        "name": "USERS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "Contains"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 340,
-                        "labels": "Group",
-                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "WriteDacl"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 341,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
-                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": ""
-                    }
-                ]
-            },
-            {
-                "__class__": "Path",
-                "nodes": [
-                    {
-                        "__class__": "Node",
-                        "id": 3,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@ESSOS.LOCAL",
-                        "domain": "ESSOS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "AllExtendedRights"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 266,
-                        "labels": "User",
-                        "name": "DAENERYS.TARGARYEN@ESSOS.LOCAL",
-                        "domain": "ESSOS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "MemberOf"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 694,
-                        "labels": "Group",
-                        "name": "ACROSSTHENARROWSEA@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "GenericAll"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 345,
-                        "labels": "Computer",
-                        "name": "KINGSLANDING.SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "GoldenCert"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 335,
-                        "labels": "Domain",
-                        "name": "SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "Contains"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 717,
-                        "labels": "Container",
-                        "name": "USERS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "Contains"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 340,
-                        "labels": "Group",
-                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "WriteDacl"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 341,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
-                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": ""
-                    }
-                ]
-            },
-            {
-                "__class__": "Path",
-                "nodes": [
-                    {
-                        "__class__": "Node",
-                        "id": 3,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@ESSOS.LOCAL",
-                        "domain": "ESSOS.LOCAL",
-                        "tenant_id": null,
                         "relation_type": "WriteDacl"
                     },
                     {
@@ -21853,7 +21622,161 @@
                         "name": "KINGSLANDING.SEVENKINGDOMS.LOCAL",
                         "domain": "SEVENKINGDOMS.LOCAL",
                         "tenant_id": null,
+                        "relation_type": "GoldenCert"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 335,
+                        "labels": "Domain",
+                        "name": "SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "Contains"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 717,
+                        "labels": "Container",
+                        "name": "USERS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "Contains"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 340,
+                        "labels": "Group",
+                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "WriteOwner"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 341,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
+                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": ""
+                    }
+                ]
+            },
+            {
+                "__class__": "Path",
+                "nodes": [
+                    {
+                        "__class__": "Node",
+                        "id": 3,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@ESSOS.LOCAL",
+                        "domain": "ESSOS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "WriteOwner"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 266,
+                        "labels": "User",
+                        "name": "DAENERYS.TARGARYEN@ESSOS.LOCAL",
+                        "domain": "ESSOS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "MemberOf"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 694,
+                        "labels": "Group",
+                        "name": "ACROSSTHENARROWSEA@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "GenericAll"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 345,
+                        "labels": "Computer",
+                        "name": "KINGSLANDING.SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
                         "relation_type": "DCSync"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 335,
+                        "labels": "Domain",
+                        "name": "SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "Contains"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 717,
+                        "labels": "Container",
+                        "name": "USERS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "Contains"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 340,
+                        "labels": "Group",
+                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "WriteDacl"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 341,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
+                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": ""
+                    }
+                ]
+            },
+            {
+                "__class__": "Path",
+                "nodes": [
+                    {
+                        "__class__": "Node",
+                        "id": 3,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@ESSOS.LOCAL",
+                        "domain": "ESSOS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "AllExtendedRights"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 266,
+                        "labels": "User",
+                        "name": "DAENERYS.TARGARYEN@ESSOS.LOCAL",
+                        "domain": "ESSOS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "MemberOf"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 694,
+                        "labels": "Group",
+                        "name": "ACROSSTHENARROWSEA@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "GenericAll"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 345,
+                        "labels": "Computer",
+                        "name": "KINGSLANDING.SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "GoldenCert"
                     },
                     {
                         "__class__": "Node",
@@ -21930,7 +21853,7 @@
                         "name": "KINGSLANDING.SEVENKINGDOMS.LOCAL",
                         "domain": "SEVENKINGDOMS.LOCAL",
                         "tenant_id": null,
-                        "relation_type": "GoldenCert"
+                        "relation_type": "DCSync"
                     },
                     {
                         "__class__": "Node",
@@ -21957,7 +21880,7 @@
                         "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
                         "domain": "SEVENKINGDOMS.LOCAL",
                         "tenant_id": null,
-                        "relation_type": "WriteOwner"
+                        "relation_type": "GenericWrite"
                     },
                     {
                         "__class__": "Node",
@@ -22058,83 +21981,6 @@
                         "domain": "ESSOS.LOCAL",
                         "tenant_id": null,
                         "relation_type": "WriteOwner"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 266,
-                        "labels": "User",
-                        "name": "DAENERYS.TARGARYEN@ESSOS.LOCAL",
-                        "domain": "ESSOS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "MemberOf"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 694,
-                        "labels": "Group",
-                        "name": "ACROSSTHENARROWSEA@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "GenericAll"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 345,
-                        "labels": "Computer",
-                        "name": "KINGSLANDING.SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "DCSync"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 335,
-                        "labels": "Domain",
-                        "name": "SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "Contains"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 717,
-                        "labels": "Container",
-                        "name": "USERS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "Contains"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 340,
-                        "labels": "Group",
-                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "WriteOwner"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 341,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
-                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": ""
-                    }
-                ]
-            },
-            {
-                "__class__": "Path",
-                "nodes": [
-                    {
-                        "__class__": "Node",
-                        "id": 3,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@ESSOS.LOCAL",
-                        "domain": "ESSOS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "WriteDacl"
                     },
                     {
                         "__class__": "Node",
@@ -22288,392 +22134,7 @@
                         "name": "DOMAIN ADMINS@ESSOS.LOCAL",
                         "domain": "ESSOS.LOCAL",
                         "tenant_id": null,
-                        "relation_type": "Owns"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 266,
-                        "labels": "User",
-                        "name": "DAENERYS.TARGARYEN@ESSOS.LOCAL",
-                        "domain": "ESSOS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "MemberOf"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 694,
-                        "labels": "Group",
-                        "name": "ACROSSTHENARROWSEA@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "GenericAll"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 345,
-                        "labels": "Computer",
-                        "name": "KINGSLANDING.SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "GoldenCert"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 335,
-                        "labels": "Domain",
-                        "name": "SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "Contains"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 717,
-                        "labels": "Container",
-                        "name": "USERS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "Contains"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 340,
-                        "labels": "Group",
-                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "WriteDacl"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 341,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
-                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": ""
-                    }
-                ]
-            },
-            {
-                "__class__": "Path",
-                "nodes": [
-                    {
-                        "__class__": "Node",
-                        "id": 3,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@ESSOS.LOCAL",
-                        "domain": "ESSOS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "WriteOwner"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 266,
-                        "labels": "User",
-                        "name": "DAENERYS.TARGARYEN@ESSOS.LOCAL",
-                        "domain": "ESSOS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "MemberOf"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 694,
-                        "labels": "Group",
-                        "name": "ACROSSTHENARROWSEA@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "GenericAll"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 345,
-                        "labels": "Computer",
-                        "name": "KINGSLANDING.SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "GoldenCert"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 335,
-                        "labels": "Domain",
-                        "name": "SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "Contains"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 717,
-                        "labels": "Container",
-                        "name": "USERS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "Contains"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 340,
-                        "labels": "Group",
-                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "WriteDacl"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 341,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
-                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": ""
-                    }
-                ]
-            },
-            {
-                "__class__": "Path",
-                "nodes": [
-                    {
-                        "__class__": "Node",
-                        "id": 3,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@ESSOS.LOCAL",
-                        "domain": "ESSOS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "AllExtendedRights"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 266,
-                        "labels": "User",
-                        "name": "DAENERYS.TARGARYEN@ESSOS.LOCAL",
-                        "domain": "ESSOS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "MemberOf"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 694,
-                        "labels": "Group",
-                        "name": "ACROSSTHENARROWSEA@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "GenericAll"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 345,
-                        "labels": "Computer",
-                        "name": "KINGSLANDING.SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "GoldenCert"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 335,
-                        "labels": "Domain",
-                        "name": "SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "Contains"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 717,
-                        "labels": "Container",
-                        "name": "USERS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "Contains"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 340,
-                        "labels": "Group",
-                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "WriteOwner"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 341,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
-                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": ""
-                    }
-                ]
-            },
-            {
-                "__class__": "Path",
-                "nodes": [
-                    {
-                        "__class__": "Node",
-                        "id": 3,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@ESSOS.LOCAL",
-                        "domain": "ESSOS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "AllExtendedRights"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 266,
-                        "labels": "User",
-                        "name": "DAENERYS.TARGARYEN@ESSOS.LOCAL",
-                        "domain": "ESSOS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "MemberOf"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 694,
-                        "labels": "Group",
-                        "name": "ACROSSTHENARROWSEA@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "GenericAll"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 345,
-                        "labels": "Computer",
-                        "name": "KINGSLANDING.SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "GoldenCert"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 335,
-                        "labels": "Domain",
-                        "name": "SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "Contains"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 717,
-                        "labels": "Container",
-                        "name": "USERS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "Contains"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 340,
-                        "labels": "Group",
-                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
                         "relation_type": "GenericWrite"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 341,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
-                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": ""
-                    }
-                ]
-            },
-            {
-                "__class__": "Path",
-                "nodes": [
-                    {
-                        "__class__": "Node",
-                        "id": 3,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@ESSOS.LOCAL",
-                        "domain": "ESSOS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "WriteOwner"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 266,
-                        "labels": "User",
-                        "name": "DAENERYS.TARGARYEN@ESSOS.LOCAL",
-                        "domain": "ESSOS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "MemberOf"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 694,
-                        "labels": "Group",
-                        "name": "ACROSSTHENARROWSEA@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "GenericAll"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 345,
-                        "labels": "Computer",
-                        "name": "KINGSLANDING.SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "GoldenCert"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 335,
-                        "labels": "Domain",
-                        "name": "SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "Contains"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 717,
-                        "labels": "Container",
-                        "name": "USERS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "Contains"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 340,
-                        "labels": "Group",
-                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "WriteOwner"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 341,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
-                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": ""
-                    }
-                ]
-            },
-            {
-                "__class__": "Path",
-                "nodes": [
-                    {
-                        "__class__": "Node",
-                        "id": 3,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@ESSOS.LOCAL",
-                        "domain": "ESSOS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "AllExtendedRights"
                     },
                     {
                         "__class__": "Node",
@@ -22701,6 +22162,83 @@
                         "domain": "SEVENKINGDOMS.LOCAL",
                         "tenant_id": null,
                         "relation_type": "DCSync"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 335,
+                        "labels": "Domain",
+                        "name": "SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "Contains"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 717,
+                        "labels": "Container",
+                        "name": "USERS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "Contains"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 340,
+                        "labels": "Group",
+                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "WriteOwner"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 341,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
+                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": ""
+                    }
+                ]
+            },
+            {
+                "__class__": "Path",
+                "nodes": [
+                    {
+                        "__class__": "Node",
+                        "id": 3,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@ESSOS.LOCAL",
+                        "domain": "ESSOS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "GenericWrite"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 266,
+                        "labels": "User",
+                        "name": "DAENERYS.TARGARYEN@ESSOS.LOCAL",
+                        "domain": "ESSOS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "MemberOf"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 694,
+                        "labels": "Group",
+                        "name": "ACROSSTHENARROWSEA@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "GenericAll"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 345,
+                        "labels": "Computer",
+                        "name": "KINGSLANDING.SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "GoldenCert"
                     },
                     {
                         "__class__": "Node",
@@ -22827,161 +22365,7 @@
                         "name": "DOMAIN ADMINS@ESSOS.LOCAL",
                         "domain": "ESSOS.LOCAL",
                         "tenant_id": null,
-                        "relation_type": "GenericWrite"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 266,
-                        "labels": "User",
-                        "name": "DAENERYS.TARGARYEN@ESSOS.LOCAL",
-                        "domain": "ESSOS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "MemberOf"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 694,
-                        "labels": "Group",
-                        "name": "ACROSSTHENARROWSEA@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "GenericAll"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 345,
-                        "labels": "Computer",
-                        "name": "KINGSLANDING.SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "DCSync"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 335,
-                        "labels": "Domain",
-                        "name": "SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "Contains"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 717,
-                        "labels": "Container",
-                        "name": "USERS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "Contains"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 340,
-                        "labels": "Group",
-                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "GenericWrite"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 341,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
-                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": ""
-                    }
-                ]
-            },
-            {
-                "__class__": "Path",
-                "nodes": [
-                    {
-                        "__class__": "Node",
-                        "id": 3,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@ESSOS.LOCAL",
-                        "domain": "ESSOS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "GenericWrite"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 266,
-                        "labels": "User",
-                        "name": "DAENERYS.TARGARYEN@ESSOS.LOCAL",
-                        "domain": "ESSOS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "MemberOf"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 694,
-                        "labels": "Group",
-                        "name": "ACROSSTHENARROWSEA@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "GenericAll"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 345,
-                        "labels": "Computer",
-                        "name": "KINGSLANDING.SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "DCSync"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 335,
-                        "labels": "Domain",
-                        "name": "SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "Contains"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 717,
-                        "labels": "Container",
-                        "name": "USERS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "Contains"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 340,
-                        "labels": "Group",
-                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "WriteDacl"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 341,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
-                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": ""
-                    }
-                ]
-            },
-            {
-                "__class__": "Path",
-                "nodes": [
-                    {
-                        "__class__": "Node",
-                        "id": 3,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@ESSOS.LOCAL",
-                        "domain": "ESSOS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "WriteDacl"
+                        "relation_type": "WriteOwner"
                     },
                     {
                         "__class__": "Node",
@@ -23035,7 +22419,7 @@
                         "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
                         "domain": "SEVENKINGDOMS.LOCAL",
                         "tenant_id": null,
-                        "relation_type": "WriteOwner"
+                        "relation_type": "GenericWrite"
                     },
                     {
                         "__class__": "Node",
@@ -23059,160 +22443,6 @@
                         "domain": "ESSOS.LOCAL",
                         "tenant_id": null,
                         "relation_type": "WriteDacl"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 266,
-                        "labels": "User",
-                        "name": "DAENERYS.TARGARYEN@ESSOS.LOCAL",
-                        "domain": "ESSOS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "MemberOf"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 694,
-                        "labels": "Group",
-                        "name": "ACROSSTHENARROWSEA@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "GenericAll"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 345,
-                        "labels": "Computer",
-                        "name": "KINGSLANDING.SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "DCSync"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 335,
-                        "labels": "Domain",
-                        "name": "SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "Contains"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 717,
-                        "labels": "Container",
-                        "name": "USERS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "Contains"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 340,
-                        "labels": "Group",
-                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "WriteDacl"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 341,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
-                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": ""
-                    }
-                ]
-            },
-            {
-                "__class__": "Path",
-                "nodes": [
-                    {
-                        "__class__": "Node",
-                        "id": 3,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@ESSOS.LOCAL",
-                        "domain": "ESSOS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "WriteDacl"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 266,
-                        "labels": "User",
-                        "name": "DAENERYS.TARGARYEN@ESSOS.LOCAL",
-                        "domain": "ESSOS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "MemberOf"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 694,
-                        "labels": "Group",
-                        "name": "ACROSSTHENARROWSEA@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "GenericAll"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 345,
-                        "labels": "Computer",
-                        "name": "KINGSLANDING.SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "DCSync"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 335,
-                        "labels": "Domain",
-                        "name": "SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "Contains"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 717,
-                        "labels": "Container",
-                        "name": "USERS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "Contains"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 340,
-                        "labels": "Group",
-                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "WriteOwner"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 341,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
-                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": ""
-                    }
-                ]
-            },
-            {
-                "__class__": "Path",
-                "nodes": [
-                    {
-                        "__class__": "Node",
-                        "id": 3,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@ESSOS.LOCAL",
-                        "domain": "ESSOS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "WriteOwner"
                     },
                     {
                         "__class__": "Node",
@@ -23267,6 +22497,314 @@
                         "domain": "SEVENKINGDOMS.LOCAL",
                         "tenant_id": null,
                         "relation_type": "GenericWrite"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 341,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
+                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": ""
+                    }
+                ]
+            },
+            {
+                "__class__": "Path",
+                "nodes": [
+                    {
+                        "__class__": "Node",
+                        "id": 3,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@ESSOS.LOCAL",
+                        "domain": "ESSOS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "GenericWrite"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 266,
+                        "labels": "User",
+                        "name": "DAENERYS.TARGARYEN@ESSOS.LOCAL",
+                        "domain": "ESSOS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "MemberOf"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 694,
+                        "labels": "Group",
+                        "name": "ACROSSTHENARROWSEA@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "GenericAll"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 345,
+                        "labels": "Computer",
+                        "name": "KINGSLANDING.SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "DCSync"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 335,
+                        "labels": "Domain",
+                        "name": "SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "Contains"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 717,
+                        "labels": "Container",
+                        "name": "USERS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "Contains"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 340,
+                        "labels": "Group",
+                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "WriteDacl"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 341,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
+                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": ""
+                    }
+                ]
+            },
+            {
+                "__class__": "Path",
+                "nodes": [
+                    {
+                        "__class__": "Node",
+                        "id": 3,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@ESSOS.LOCAL",
+                        "domain": "ESSOS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "AllExtendedRights"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 266,
+                        "labels": "User",
+                        "name": "DAENERYS.TARGARYEN@ESSOS.LOCAL",
+                        "domain": "ESSOS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "MemberOf"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 694,
+                        "labels": "Group",
+                        "name": "ACROSSTHENARROWSEA@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "GenericAll"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 345,
+                        "labels": "Computer",
+                        "name": "KINGSLANDING.SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "DCSync"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 335,
+                        "labels": "Domain",
+                        "name": "SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "Contains"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 717,
+                        "labels": "Container",
+                        "name": "USERS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "Contains"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 340,
+                        "labels": "Group",
+                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "WriteOwner"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 341,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
+                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": ""
+                    }
+                ]
+            },
+            {
+                "__class__": "Path",
+                "nodes": [
+                    {
+                        "__class__": "Node",
+                        "id": 3,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@ESSOS.LOCAL",
+                        "domain": "ESSOS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "WriteOwner"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 266,
+                        "labels": "User",
+                        "name": "DAENERYS.TARGARYEN@ESSOS.LOCAL",
+                        "domain": "ESSOS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "MemberOf"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 694,
+                        "labels": "Group",
+                        "name": "ACROSSTHENARROWSEA@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "GenericAll"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 345,
+                        "labels": "Computer",
+                        "name": "KINGSLANDING.SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "GoldenCert"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 335,
+                        "labels": "Domain",
+                        "name": "SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "Contains"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 717,
+                        "labels": "Container",
+                        "name": "USERS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "Contains"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 340,
+                        "labels": "Group",
+                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "WriteDacl"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 341,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
+                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": ""
+                    }
+                ]
+            },
+            {
+                "__class__": "Path",
+                "nodes": [
+                    {
+                        "__class__": "Node",
+                        "id": 3,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@ESSOS.LOCAL",
+                        "domain": "ESSOS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "WriteDacl"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 266,
+                        "labels": "User",
+                        "name": "DAENERYS.TARGARYEN@ESSOS.LOCAL",
+                        "domain": "ESSOS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "MemberOf"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 694,
+                        "labels": "Group",
+                        "name": "ACROSSTHENARROWSEA@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "GenericAll"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 345,
+                        "labels": "Computer",
+                        "name": "KINGSLANDING.SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "DCSync"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 335,
+                        "labels": "Domain",
+                        "name": "SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "Contains"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 717,
+                        "labels": "Container",
+                        "name": "USERS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "Contains"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 340,
+                        "labels": "Group",
+                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "WriteDacl"
                     },
                     {
                         "__class__": "Node",
@@ -23420,6 +22958,83 @@
                         "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
                         "domain": "SEVENKINGDOMS.LOCAL",
                         "tenant_id": null,
+                        "relation_type": "WriteOwner"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 341,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
+                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": ""
+                    }
+                ]
+            },
+            {
+                "__class__": "Path",
+                "nodes": [
+                    {
+                        "__class__": "Node",
+                        "id": 3,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@ESSOS.LOCAL",
+                        "domain": "ESSOS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "Owns"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 266,
+                        "labels": "User",
+                        "name": "DAENERYS.TARGARYEN@ESSOS.LOCAL",
+                        "domain": "ESSOS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "MemberOf"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 694,
+                        "labels": "Group",
+                        "name": "ACROSSTHENARROWSEA@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "GenericAll"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 345,
+                        "labels": "Computer",
+                        "name": "KINGSLANDING.SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "GoldenCert"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 335,
+                        "labels": "Domain",
+                        "name": "SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "Contains"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 717,
+                        "labels": "Container",
+                        "name": "USERS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "Contains"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 340,
+                        "labels": "Group",
+                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
                         "relation_type": "WriteDacl"
                     },
                     {
@@ -23497,7 +23112,469 @@
                         "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
                         "domain": "SEVENKINGDOMS.LOCAL",
                         "tenant_id": null,
+                        "relation_type": "WriteOwner"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 341,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
+                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": ""
+                    }
+                ]
+            },
+            {
+                "__class__": "Path",
+                "nodes": [
+                    {
+                        "__class__": "Node",
+                        "id": 3,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@ESSOS.LOCAL",
+                        "domain": "ESSOS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "WriteDacl"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 266,
+                        "labels": "User",
+                        "name": "DAENERYS.TARGARYEN@ESSOS.LOCAL",
+                        "domain": "ESSOS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "MemberOf"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 694,
+                        "labels": "Group",
+                        "name": "ACROSSTHENARROWSEA@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "GenericAll"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 345,
+                        "labels": "Computer",
+                        "name": "KINGSLANDING.SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "GoldenCert"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 335,
+                        "labels": "Domain",
+                        "name": "SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "Contains"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 717,
+                        "labels": "Container",
+                        "name": "USERS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "Contains"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 340,
+                        "labels": "Group",
+                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "WriteOwner"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 341,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
+                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": ""
+                    }
+                ]
+            },
+            {
+                "__class__": "Path",
+                "nodes": [
+                    {
+                        "__class__": "Node",
+                        "id": 3,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@ESSOS.LOCAL",
+                        "domain": "ESSOS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "WriteDacl"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 266,
+                        "labels": "User",
+                        "name": "DAENERYS.TARGARYEN@ESSOS.LOCAL",
+                        "domain": "ESSOS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "MemberOf"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 694,
+                        "labels": "Group",
+                        "name": "ACROSSTHENARROWSEA@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "GenericAll"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 345,
+                        "labels": "Computer",
+                        "name": "KINGSLANDING.SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "DCSync"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 335,
+                        "labels": "Domain",
+                        "name": "SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "Contains"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 717,
+                        "labels": "Container",
+                        "name": "USERS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "Contains"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 340,
+                        "labels": "Group",
+                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "WriteOwner"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 341,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
+                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": ""
+                    }
+                ]
+            },
+            {
+                "__class__": "Path",
+                "nodes": [
+                    {
+                        "__class__": "Node",
+                        "id": 3,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@ESSOS.LOCAL",
+                        "domain": "ESSOS.LOCAL",
+                        "tenant_id": null,
                         "relation_type": "GenericWrite"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 266,
+                        "labels": "User",
+                        "name": "DAENERYS.TARGARYEN@ESSOS.LOCAL",
+                        "domain": "ESSOS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "MemberOf"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 694,
+                        "labels": "Group",
+                        "name": "ACROSSTHENARROWSEA@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "GenericAll"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 345,
+                        "labels": "Computer",
+                        "name": "KINGSLANDING.SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "DCSync"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 335,
+                        "labels": "Domain",
+                        "name": "SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "Contains"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 717,
+                        "labels": "Container",
+                        "name": "USERS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "Contains"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 340,
+                        "labels": "Group",
+                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "GenericWrite"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 341,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
+                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": ""
+                    }
+                ]
+            },
+            {
+                "__class__": "Path",
+                "nodes": [
+                    {
+                        "__class__": "Node",
+                        "id": 3,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@ESSOS.LOCAL",
+                        "domain": "ESSOS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "AllExtendedRights"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 266,
+                        "labels": "User",
+                        "name": "DAENERYS.TARGARYEN@ESSOS.LOCAL",
+                        "domain": "ESSOS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "MemberOf"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 694,
+                        "labels": "Group",
+                        "name": "ACROSSTHENARROWSEA@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "GenericAll"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 345,
+                        "labels": "Computer",
+                        "name": "KINGSLANDING.SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "GoldenCert"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 335,
+                        "labels": "Domain",
+                        "name": "SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "Contains"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 717,
+                        "labels": "Container",
+                        "name": "USERS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "Contains"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 340,
+                        "labels": "Group",
+                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "WriteOwner"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 341,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
+                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": ""
+                    }
+                ]
+            },
+            {
+                "__class__": "Path",
+                "nodes": [
+                    {
+                        "__class__": "Node",
+                        "id": 3,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@ESSOS.LOCAL",
+                        "domain": "ESSOS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "GenericWrite"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 266,
+                        "labels": "User",
+                        "name": "DAENERYS.TARGARYEN@ESSOS.LOCAL",
+                        "domain": "ESSOS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "MemberOf"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 694,
+                        "labels": "Group",
+                        "name": "ACROSSTHENARROWSEA@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "GenericAll"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 345,
+                        "labels": "Computer",
+                        "name": "KINGSLANDING.SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "GoldenCert"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 335,
+                        "labels": "Domain",
+                        "name": "SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "Contains"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 717,
+                        "labels": "Container",
+                        "name": "USERS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "Contains"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 340,
+                        "labels": "Group",
+                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "WriteDacl"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 341,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
+                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": ""
+                    }
+                ]
+            },
+            {
+                "__class__": "Path",
+                "nodes": [
+                    {
+                        "__class__": "Node",
+                        "id": 3,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@ESSOS.LOCAL",
+                        "domain": "ESSOS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "GenericWrite"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 266,
+                        "labels": "User",
+                        "name": "DAENERYS.TARGARYEN@ESSOS.LOCAL",
+                        "domain": "ESSOS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "MemberOf"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 694,
+                        "labels": "Group",
+                        "name": "ACROSSTHENARROWSEA@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "GenericAll"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 345,
+                        "labels": "Computer",
+                        "name": "KINGSLANDING.SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "GoldenCert"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 335,
+                        "labels": "Domain",
+                        "name": "SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "Contains"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 717,
+                        "labels": "Container",
+                        "name": "USERS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "Contains"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 340,
+                        "labels": "Group",
+                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "WriteOwner"
                     },
                     {
                         "__class__": "Node",
@@ -23574,7 +23651,7 @@
                         "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
                         "domain": "SEVENKINGDOMS.LOCAL",
                         "tenant_id": null,
-                        "relation_type": "WriteOwner"
+                        "relation_type": "WriteDacl"
                     },
                     {
                         "__class__": "Node",
@@ -23597,84 +23674,7 @@
                         "name": "DOMAIN ADMINS@ESSOS.LOCAL",
                         "domain": "ESSOS.LOCAL",
                         "tenant_id": null,
-                        "relation_type": "GenericWrite"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 266,
-                        "labels": "User",
-                        "name": "DAENERYS.TARGARYEN@ESSOS.LOCAL",
-                        "domain": "ESSOS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "MemberOf"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 694,
-                        "labels": "Group",
-                        "name": "ACROSSTHENARROWSEA@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "GenericAll"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 345,
-                        "labels": "Computer",
-                        "name": "KINGSLANDING.SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "GoldenCert"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 335,
-                        "labels": "Domain",
-                        "name": "SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "Contains"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 717,
-                        "labels": "Container",
-                        "name": "USERS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "Contains"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 340,
-                        "labels": "Group",
-                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "GenericWrite"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 341,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
-                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": ""
-                    }
-                ]
-            },
-            {
-                "__class__": "Path",
-                "nodes": [
-                    {
-                        "__class__": "Node",
-                        "id": 3,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@ESSOS.LOCAL",
-                        "domain": "ESSOS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "GenericWrite"
+                        "relation_type": "AllExtendedRights"
                     },
                     {
                         "__class__": "Node",
@@ -23728,7 +23728,7 @@
                         "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
                         "domain": "SEVENKINGDOMS.LOCAL",
                         "tenant_id": null,
-                        "relation_type": "WriteOwner"
+                        "relation_type": "GenericWrite"
                     },
                     {
                         "__class__": "Node",
@@ -23751,7 +23751,7 @@
                         "name": "DOMAIN ADMINS@ESSOS.LOCAL",
                         "domain": "ESSOS.LOCAL",
                         "tenant_id": null,
-                        "relation_type": "GenericWrite"
+                        "relation_type": "AllExtendedRights"
                     },
                     {
                         "__class__": "Node",
@@ -23805,7 +23805,7 @@
                         "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
                         "domain": "SEVENKINGDOMS.LOCAL",
                         "tenant_id": null,
-                        "relation_type": "WriteOwner"
+                        "relation_type": "WriteDacl"
                     },
                     {
                         "__class__": "Node",
@@ -23828,7 +23828,7 @@
                         "name": "DOMAIN ADMINS@ESSOS.LOCAL",
                         "domain": "ESSOS.LOCAL",
                         "tenant_id": null,
-                        "relation_type": "WriteOwner"
+                        "relation_type": "WriteDacl"
                     },
                     {
                         "__class__": "Node",
@@ -23896,7 +23896,7 @@
                         "name": "DOMAIN ADMINS@ESSOS.LOCAL",
                         "domain": "ESSOS.LOCAL",
                         "tenant_id": null,
-                        "relation_type": "AllExtendedRights"
+                        "relation_type": "Owns"
                     },
                     {
                         "__class__": "Node",
@@ -23924,74 +23924,6 @@
                         "domain": "SEVENKINGDOMS.LOCAL",
                         "tenant_id": null,
                         "relation_type": "DCSync"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 335,
-                        "labels": "Domain",
-                        "name": "SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "Contains"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 717,
-                        "labels": "Container",
-                        "name": "USERS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "Contains"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 358,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": ""
-                    }
-                ]
-            },
-            {
-                "__class__": "Path",
-                "nodes": [
-                    {
-                        "__class__": "Node",
-                        "id": 3,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@ESSOS.LOCAL",
-                        "domain": "ESSOS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "GenericWrite"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 266,
-                        "labels": "User",
-                        "name": "DAENERYS.TARGARYEN@ESSOS.LOCAL",
-                        "domain": "ESSOS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "MemberOf"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 694,
-                        "labels": "Group",
-                        "name": "ACROSSTHENARROWSEA@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "GenericAll"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 345,
-                        "labels": "Computer",
-                        "name": "KINGSLANDING.SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "GoldenCert"
                     },
                     {
                         "__class__": "Node",
@@ -24168,7 +24100,7 @@
                         "name": "DOMAIN ADMINS@ESSOS.LOCAL",
                         "domain": "ESSOS.LOCAL",
                         "tenant_id": null,
-                        "relation_type": "Owns"
+                        "relation_type": "AllExtendedRights"
                     },
                     {
                         "__class__": "Node",
@@ -24236,7 +24168,7 @@
                         "name": "DOMAIN ADMINS@ESSOS.LOCAL",
                         "domain": "ESSOS.LOCAL",
                         "tenant_id": null,
-                        "relation_type": "WriteDacl"
+                        "relation_type": "WriteOwner"
                     },
                     {
                         "__class__": "Node",
@@ -24263,7 +24195,7 @@
                         "name": "KINGSLANDING.SEVENKINGDOMS.LOCAL",
                         "domain": "SEVENKINGDOMS.LOCAL",
                         "tenant_id": null,
-                        "relation_type": "DCSync"
+                        "relation_type": "GoldenCert"
                     },
                     {
                         "__class__": "Node",
@@ -24399,7 +24331,7 @@
                         "name": "KINGSLANDING.SEVENKINGDOMS.LOCAL",
                         "domain": "SEVENKINGDOMS.LOCAL",
                         "tenant_id": null,
-                        "relation_type": "GoldenCert"
+                        "relation_type": "DCSync"
                     },
                     {
                         "__class__": "Node",
@@ -24468,6 +24400,74 @@
                         "domain": "SEVENKINGDOMS.LOCAL",
                         "tenant_id": null,
                         "relation_type": "DCSync"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 335,
+                        "labels": "Domain",
+                        "name": "SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "Contains"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 717,
+                        "labels": "Container",
+                        "name": "USERS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "Contains"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 358,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": ""
+                    }
+                ]
+            },
+            {
+                "__class__": "Path",
+                "nodes": [
+                    {
+                        "__class__": "Node",
+                        "id": 3,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@ESSOS.LOCAL",
+                        "domain": "ESSOS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "GenericWrite"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 266,
+                        "labels": "User",
+                        "name": "DAENERYS.TARGARYEN@ESSOS.LOCAL",
+                        "domain": "ESSOS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "MemberOf"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 694,
+                        "labels": "Group",
+                        "name": "ACROSSTHENARROWSEA@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "GenericAll"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 345,
+                        "labels": "Computer",
+                        "name": "KINGSLANDING.SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "GoldenCert"
                     },
                     {
                         "__class__": "Node",
@@ -24694,6 +24694,70 @@
                         "name": "DOMAIN ADMINS@SEVENKINGDOMS.LOCAL",
                         "domain": "SEVENKINGDOMS.LOCAL",
                         "tenant_id": null,
+                        "relation_type": "WriteOwner"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 340,
+                        "labels": "Group",
+                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "GenericWrite"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 341,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
+                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": ""
+                    }
+                ]
+            },
+            {
+                "__class__": "Path",
+                "nodes": [
+                    {
+                        "__class__": "Node",
+                        "id": 358,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "WriteDacl"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 340,
+                        "labels": "Group",
+                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "WriteOwner"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 341,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
+                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": ""
+                    }
+                ]
+            },
+            {
+                "__class__": "Path",
+                "nodes": [
+                    {
+                        "__class__": "Node",
+                        "id": 358,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
                         "relation_type": "GenericWrite"
                     },
                     {
@@ -24758,7 +24822,135 @@
                         "name": "DOMAIN ADMINS@SEVENKINGDOMS.LOCAL",
                         "domain": "SEVENKINGDOMS.LOCAL",
                         "tenant_id": null,
+                        "relation_type": "Owns"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 340,
+                        "labels": "Group",
+                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "WriteOwner"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 341,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
+                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": ""
+                    }
+                ]
+            },
+            {
+                "__class__": "Path",
+                "nodes": [
+                    {
+                        "__class__": "Node",
+                        "id": 358,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "WriteOwner"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 340,
+                        "labels": "Group",
+                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "WriteOwner"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 341,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
+                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": ""
+                    }
+                ]
+            },
+            {
+                "__class__": "Path",
+                "nodes": [
+                    {
+                        "__class__": "Node",
+                        "id": 358,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "GenericWrite"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 340,
+                        "labels": "Group",
+                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
                         "relation_type": "WriteDacl"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 341,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
+                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": ""
+                    }
+                ]
+            },
+            {
+                "__class__": "Path",
+                "nodes": [
+                    {
+                        "__class__": "Node",
+                        "id": 358,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "Owns"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 340,
+                        "labels": "Group",
+                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "GenericWrite"
+                    },
+                    {
+                        "__class__": "Node",
+                        "id": 341,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
+                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": ""
+                    }
+                ]
+            },
+            {
+                "__class__": "Path",
+                "nodes": [
+                    {
+                        "__class__": "Node",
+                        "id": 358,
+                        "labels": "Group",
+                        "name": "DOMAIN ADMINS@SEVENKINGDOMS.LOCAL",
+                        "domain": "SEVENKINGDOMS.LOCAL",
+                        "tenant_id": null,
+                        "relation_type": "GenericWrite"
                     },
                     {
                         "__class__": "Node",
@@ -24832,198 +25024,6 @@
                         "domain": "SEVENKINGDOMS.LOCAL",
                         "tenant_id": null,
                         "relation_type": "WriteDacl"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 341,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
-                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": ""
-                    }
-                ]
-            },
-            {
-                "__class__": "Path",
-                "nodes": [
-                    {
-                        "__class__": "Node",
-                        "id": 358,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "GenericWrite"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 340,
-                        "labels": "Group",
-                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "WriteDacl"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 341,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
-                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": ""
-                    }
-                ]
-            },
-            {
-                "__class__": "Path",
-                "nodes": [
-                    {
-                        "__class__": "Node",
-                        "id": 358,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "WriteOwner"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 340,
-                        "labels": "Group",
-                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "GenericWrite"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 341,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
-                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": ""
-                    }
-                ]
-            },
-            {
-                "__class__": "Path",
-                "nodes": [
-                    {
-                        "__class__": "Node",
-                        "id": 358,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "Owns"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 340,
-                        "labels": "Group",
-                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "GenericWrite"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 341,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
-                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": ""
-                    }
-                ]
-            },
-            {
-                "__class__": "Path",
-                "nodes": [
-                    {
-                        "__class__": "Node",
-                        "id": 358,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "WriteOwner"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 340,
-                        "labels": "Group",
-                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "WriteOwner"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 341,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
-                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": ""
-                    }
-                ]
-            },
-            {
-                "__class__": "Path",
-                "nodes": [
-                    {
-                        "__class__": "Node",
-                        "id": 358,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "Owns"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 340,
-                        "labels": "Group",
-                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "WriteOwner"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 341,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@NORTH.SEVENKINGDOMS.LOCAL",
-                        "domain": "NORTH.SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": ""
-                    }
-                ]
-            },
-            {
-                "__class__": "Path",
-                "nodes": [
-                    {
-                        "__class__": "Node",
-                        "id": 358,
-                        "labels": "Group",
-                        "name": "DOMAIN ADMINS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "GenericWrite"
-                    },
-                    {
-                        "__class__": "Node",
-                        "id": 340,
-                        "labels": "Group",
-                        "name": "ENTERPRISE ADMINS@SEVENKINGDOMS.LOCAL",
-                        "domain": "SEVENKINGDOMS.LOCAL",
-                        "tenant_id": null,
-                        "relation_type": "WriteOwner"
                     },
                     {
                         "__class__": "Node",
@@ -25099,20 +25099,6 @@
                 "g.members_count": "-"
             },
             {
-                "n.name": "DOTHRAKI@ESSOS.LOCAL",
-                "g.name": "VAGRANT@ESSOS.LOCAL",
-                "type(r2)": "Owns",
-                "LABELS(g)": [
-                    "User"
-                ],
-                "labels(n)": [
-                    "Group",
-                    "Base"
-                ],
-                "ID(n)": 302,
-                "g.members_count": "-"
-            },
-            {
                 "n.name": "TARGARYEN@ESSOS.LOCAL",
                 "g.name": "VAGRANT@ESSOS.LOCAL",
                 "type(r2)": "Owns",
@@ -25141,17 +25127,17 @@
                 "g.members_count": "-"
             },
             {
-                "n.name": "ANSIBLE-LAPS@ESSOS.LOCAL",
+                "n.name": "SPYS@ESSOS.LOCAL",
                 "g.name": "VAGRANT@ESSOS.LOCAL",
                 "type(r2)": "Owns",
                 "LABELS(g)": [
                     "User"
                 ],
                 "labels(n)": [
-                    "Base",
-                    "GPO"
+                    "Group",
+                    "Base"
                 ],
-                "ID(n)": 220,
+                "ID(n)": 292,
                 "g.members_count": "-"
             },
             {
@@ -25169,7 +25155,7 @@
                 "g.members_count": "-"
             },
             {
-                "n.name": "SPYS@ESSOS.LOCAL",
+                "n.name": "DOTHRAKI@ESSOS.LOCAL",
                 "g.name": "VAGRANT@ESSOS.LOCAL",
                 "type(r2)": "Owns",
                 "LABELS(g)": [
@@ -25179,7 +25165,21 @@
                     "Group",
                     "Base"
                 ],
-                "ID(n)": 292,
+                "ID(n)": 302,
+                "g.members_count": "-"
+            },
+            {
+                "n.name": "ANSIBLE-LAPS@ESSOS.LOCAL",
+                "g.name": "VAGRANT@ESSOS.LOCAL",
+                "type(r2)": "Owns",
+                "LABELS(g)": [
+                    "User"
+                ],
+                "labels(n)": [
+                    "Base",
+                    "GPO"
+                ],
+                "ID(n)": 220,
                 "g.members_count": "-"
             },
             {
@@ -25337,7 +25337,7 @@
                 "g.members_count": "-"
             },
             {
-                "n.name": "NIGHT WATCH@NORTH.SEVENKINGDOMS.LOCAL",
+                "n.name": "STARK@NORTH.SEVENKINGDOMS.LOCAL",
                 "g.name": "VAGRANT@NORTH.SEVENKINGDOMS.LOCAL",
                 "type(r2)": "Owns",
                 "LABELS(g)": [
@@ -25347,7 +25347,7 @@
                     "Group",
                     "Base"
                 ],
-                "ID(n)": 572,
+                "ID(n)": 582,
                 "g.members_count": "-"
             },
             {
@@ -25367,7 +25367,7 @@
             {
                 "n.name": "STARKWALLPAPER@NORTH.SEVENKINGDOMS.LOCAL",
                 "g.name": "VAGRANT@NORTH.SEVENKINGDOMS.LOCAL",
-                "type(r2)": "Owns",
+                "type(r2)": "WriteOwner",
                 "LABELS(g)": [
                     "User"
                 ],
@@ -25381,7 +25381,7 @@
             {
                 "n.name": "STARKWALLPAPER@NORTH.SEVENKINGDOMS.LOCAL",
                 "g.name": "VAGRANT@NORTH.SEVENKINGDOMS.LOCAL",
-                "type(r2)": "WriteOwner",
+                "type(r2)": "Owns",
                 "LABELS(g)": [
                     "User"
                 ],
@@ -25390,20 +25390,6 @@
                     "GPO"
                 ],
                 "ID(n)": 338,
-                "g.members_count": "-"
-            },
-            {
-                "n.name": "STARK@NORTH.SEVENKINGDOMS.LOCAL",
-                "g.name": "VAGRANT@NORTH.SEVENKINGDOMS.LOCAL",
-                "type(r2)": "Owns",
-                "LABELS(g)": [
-                    "User"
-                ],
-                "labels(n)": [
-                    "Group",
-                    "Base"
-                ],
-                "ID(n)": 582,
                 "g.members_count": "-"
             },
             {
@@ -25418,6 +25404,20 @@
                     "Base"
                 ],
                 "ID(n)": 576,
+                "g.members_count": "-"
+            },
+            {
+                "n.name": "NIGHT WATCH@NORTH.SEVENKINGDOMS.LOCAL",
+                "g.name": "VAGRANT@NORTH.SEVENKINGDOMS.LOCAL",
+                "type(r2)": "Owns",
+                "LABELS(g)": [
+                    "User"
+                ],
+                "labels(n)": [
+                    "Group",
+                    "Base"
+                ],
+                "ID(n)": 572,
                 "g.members_count": "-"
             },
             {
@@ -25939,48 +25939,6 @@
                 "g.members_count": "-"
             },
             {
-                "n.name": "BARATHEON@SEVENKINGDOMS.LOCAL",
-                "g.name": "VAGRANT@SEVENKINGDOMS.LOCAL",
-                "type(r2)": "Owns",
-                "LABELS(g)": [
-                    "User"
-                ],
-                "labels(n)": [
-                    "Group",
-                    "Base"
-                ],
-                "ID(n)": 684,
-                "g.members_count": "-"
-            },
-            {
-                "n.name": "DRAGONSTONE@SEVENKINGDOMS.LOCAL",
-                "g.name": "VAGRANT@SEVENKINGDOMS.LOCAL",
-                "type(r2)": "Owns",
-                "LABELS(g)": [
-                    "User"
-                ],
-                "labels(n)": [
-                    "Group",
-                    "Base"
-                ],
-                "ID(n)": 689,
-                "g.members_count": "-"
-            },
-            {
-                "n.name": "ACROSSTHENARROWSEA@SEVENKINGDOMS.LOCAL",
-                "g.name": "VAGRANT@SEVENKINGDOMS.LOCAL",
-                "type(r2)": "Owns",
-                "LABELS(g)": [
-                    "User"
-                ],
-                "labels(n)": [
-                    "Group",
-                    "Base"
-                ],
-                "ID(n)": 694,
-                "g.members_count": "-"
-            },
-            {
                 "n.name": "LANNISTER@SEVENKINGDOMS.LOCAL",
                 "g.name": "VAGRANT@SEVENKINGDOMS.LOCAL",
                 "type(r2)": "Owns",
@@ -26006,6 +25964,48 @@
                     "Base"
                 ],
                 "ID(n)": 687,
+                "g.members_count": "-"
+            },
+            {
+                "n.name": "BARATHEON@SEVENKINGDOMS.LOCAL",
+                "g.name": "VAGRANT@SEVENKINGDOMS.LOCAL",
+                "type(r2)": "Owns",
+                "LABELS(g)": [
+                    "User"
+                ],
+                "labels(n)": [
+                    "Group",
+                    "Base"
+                ],
+                "ID(n)": 684,
+                "g.members_count": "-"
+            },
+            {
+                "n.name": "ACROSSTHENARROWSEA@SEVENKINGDOMS.LOCAL",
+                "g.name": "VAGRANT@SEVENKINGDOMS.LOCAL",
+                "type(r2)": "Owns",
+                "LABELS(g)": [
+                    "User"
+                ],
+                "labels(n)": [
+                    "Group",
+                    "Base"
+                ],
+                "ID(n)": 694,
+                "g.members_count": "-"
+            },
+            {
+                "n.name": "DRAGONSTONE@SEVENKINGDOMS.LOCAL",
+                "g.name": "VAGRANT@SEVENKINGDOMS.LOCAL",
+                "type(r2)": "Owns",
+                "LABELS(g)": [
+                    "User"
+                ],
+                "labels(n)": [
+                    "Group",
+                    "Base"
+                ],
+                "ID(n)": 689,
                 "g.members_count": "-"
             },
             {
@@ -51261,28 +51261,23 @@
         ]
     },
     "users_admin_on_servers_list": {
-        "CASTELBLACK.NORTH.SEVENKINGDOMS.LOCAL": [
-            "SQL_SVC@NORTH.SEVENKINGDOMS.LOCAL"
-        ],
         "KINGSLANDING.SEVENKINGDOMS.LOCAL": [
             "STANNIS.BARATHEON@SEVENKINGDOMS.LOCAL"
         ],
         "BRAAVOS.ESSOS.LOCAL": [
             "SQL_SVC@ESSOS.LOCAL"
+        ],
+        "CASTELBLACK.NORTH.SEVENKINGDOMS.LOCAL": [
+            "SQL_SVC@NORTH.SEVENKINGDOMS.LOCAL"
         ]
     },
     "servers_with_most_paths": 1,
     "users_admin_on_servers": {
-        "CASTELBLACK.NORTH.SEVENKINGDOMS.LOCAL": 1,
         "KINGSLANDING.SEVENKINGDOMS.LOCAL": 1,
-        "BRAAVOS.ESSOS.LOCAL": 1
+        "BRAAVOS.ESSOS.LOCAL": 1,
+        "CASTELBLACK.NORTH.SEVENKINGDOMS.LOCAL": 1
     },
     "users_admin_on_servers_all_data": [
-        {
-            "user": "SQL_SVC@NORTH.SEVENKINGDOMS.LOCAL",
-            "computer": "CASTELBLACK.NORTH.SEVENKINGDOMS.LOCAL",
-            "has_path_to_da": null
-        },
         {
             "user": "STANNIS.BARATHEON@SEVENKINGDOMS.LOCAL",
             "computer": "KINGSLANDING.SEVENKINGDOMS.LOCAL",
@@ -51292,6 +51287,11 @@
             "user": "SQL_SVC@ESSOS.LOCAL",
             "computer": "BRAAVOS.ESSOS.LOCAL",
             "has_path_to_da": true
+        },
+        {
+            "user": "SQL_SVC@NORTH.SEVENKINGDOMS.LOCAL",
+            "computer": "CASTELBLACK.NORTH.SEVENKINGDOMS.LOCAL",
+            "has_path_to_da": null
         }
     ],
     "dico_paths_computers_to_DA": {

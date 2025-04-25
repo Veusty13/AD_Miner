@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import List, Dict, Mapping, Sequence, Any
+from typing import List, Dict, Mapping, Sequence, Any, Pattern
 from enum import Enum
 import json
 import math
@@ -223,26 +223,40 @@ def normalize_path(
     return rr_processed
 
 
+_CLEAN_PATTERNS: dict[Pattern, str] = {
+    re.compile(r"\\n"): "",
+    re.compile(r"\r\n?"): "",
+    re.compile(r"\n"): "",
+    re.compile(r"\\t"): "    ",
+    re.compile(r'\\+"'): r'"',
+    re.compile(r"\\\\"): r"\\",
+    re.compile(r"\""): r"'",
+}
+
+_SPACE_COLLAPSE: Pattern = re.compile(r" {2,}")
+
+
+def clean(text: str) -> str:
+    for pattern, repl in _CLEAN_PATTERNS.items():
+        text = pattern.sub(repl, text)
+    text = _SPACE_COLLAPSE.sub(" ", text)
+    return text
+
+
 def generate_llm_prompt(
     task: LLMTask,
     control_info: dict,
     requests_results: List[dict[str, Any]],
 ) -> str:
-    def unescape(text: str) -> str:
-        return bytes(text, "utf-8").decode("unicode_escape")
+    template = PROMPT_TEMPLATES[task]
 
-    def remove_html_tags(text: str) -> str:
-        return re.sub(r"<[^>]+>", "", text)
+    ctrl_txt = clean(json.dumps(control_info, ensure_ascii=False, indent=2))
+    reqs_txt = clean(json.dumps(requests_results, ensure_ascii=False, indent=2))
 
-    prompt_template = PROMPT_TEMPLATES[task]
-
-    formatted_prompt = unescape(
-        remove_html_tags(
-            prompt_template.format(
-                control_info=control_info,
-                requests_results=requests_results,
-            )
-        )
+    prompt = template.format(
+        control_info=ctrl_txt,
+        requests_results=reqs_txt,
     )
+    prompt = clean(re.sub(r"<[^>]+>", "", prompt))
 
-    return formatted_prompt.strip()
+    return prompt.strip()
