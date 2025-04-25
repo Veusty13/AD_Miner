@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import List, Dict, Any
+from typing import List, Dict, Mapping, Sequence, Any
 from enum import Enum
 import json
 import math
@@ -187,34 +187,40 @@ def read_single_request_result(
 def normalize_path(
     request_result: RequestResult | DefaultRequestResult,
 ) -> RequestResult | DefaultRequestResult:
-    request_result_to_process = request_result.model_copy()
-    try:
-        if not isinstance(request_result_to_process, RequestResult):
-            return request_result
-        result = request_result_to_process.result
-        is_a_list_of_path = math.prod(
-            [element["__class__"] == "Path" for element in result]
-        )
-        if not is_a_list_of_path:
-            return request_result
-        all_nodes = []
-        all_edges = []
-        keys_node = ["id", "labels", "name", "domain", "tenant_id"]
-        keys_edge = ["id", "relation_type"]
-        for path in result:
-            raw_nodes_in_path = path["nodes"]
-            edges_in_path = []
-            for node in raw_nodes_in_path:
-                candidate_node = {k: v for k, v in node.items() if k in keys_node}
-                if candidate_node not in all_nodes:
-                    all_nodes.append(candidate_node)
-                edges_in_path.append({k: v for k, v in node.items() if k in keys_edge})
-            all_edges.append(edges_in_path)
-        normalized_path = {"nodes": all_nodes, "edges": all_edges}
-        request_result_to_process.result = normalized_path
-        return request_result_to_process
-    except Exception:
-        return request_result
+    rr_processed = request_result.model_copy(deep=True)
+
+    def _transform(obj: Any) -> Any:
+        if isinstance(obj, Sequence) and not isinstance(obj, (str, bytes)):
+            try:
+                is_list_of_path = math.prod(
+                    [element["__class__"] == "Path" for element in obj]
+                )
+            except Exception:
+                is_list_of_path = 0
+            if is_list_of_path:
+                keys_node = {"id", "labels", "name", "domain", "tenant_id"}
+                keys_edge = {"id", "relation_type"}
+                all_nodes: list[dict[str, Any]] = []
+                all_edges: list[list[dict[str, Any]]] = []
+                for path in obj:
+                    raw_nodes = path["nodes"]
+                    edges_in_path: list[dict[str, Any]] = []
+                    for node in raw_nodes:
+                        node_view = {k: v for k, v in node.items() if k in keys_node}
+                        if node_view not in all_nodes:
+                            all_nodes.append(node_view)
+                        edges_in_path.append(
+                            {k: v for k, v in node.items() if k in keys_edge}
+                        )
+                    all_edges.append(edges_in_path)
+                return {"nodes": all_nodes, "edges": all_edges}
+            return [_transform(el) for el in obj]
+        if isinstance(obj, Mapping):
+            return {k: _transform(v) for k, v in obj.items()}
+        return obj
+
+    rr_processed.result = _transform(rr_processed.result)
+    return rr_processed
 
 
 def generate_llm_prompt(

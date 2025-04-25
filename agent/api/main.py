@@ -6,12 +6,10 @@ from utils import (
     RequestResult,
     DefaultRequestResult,
     LLMTask,
-    PROMPT_TEMPLATES,
     read_all_controls_info,
     read_single_control_info,
     read_single_request_result,
     generate_llm_prompt,
-    normalize_path,
 )
 
 app = FastAPI()
