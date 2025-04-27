@@ -43,7 +43,7 @@ async def get_requests_control(
     return output
 
 
-@app.post("/llm/ask/{task}")
+@app.post("/llm/prompt/{task}")
 async def ask_llm(
     task: Annotated[LLMTask, Path()], control_title: Annotated[str, Body()]
 ) -> str:

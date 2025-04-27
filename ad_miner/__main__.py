@@ -47,23 +47,39 @@ signal.signal(signal.SIGINT, handler)
 
 
 def serialize_entire_dict(data):
-    def serialize(obj):
+    def serialize(obj, visited):
+        if isinstance(obj, (str, int, float, bool, type(None))):
+            return obj
+        obj_id = id(obj)
+        if obj_id in visited:
+            return None
+        visited.add(obj_id)
+
+        # 3) Collections de base
         if isinstance(obj, dict):
-            return {k: serialize(v) for k, v in obj.items()}
+            result = {k: serialize(v, visited) for k, v in obj.items()}
         elif isinstance(obj, list):
-            return [serialize(v) for v in obj]
+            result = [serialize(v, visited) for v in obj]
+        elif isinstance(obj, tuple):
+            result = tuple(serialize(v, visited) for v in obj)
+        elif isinstance(obj, set):
+            result = {serialize(v, visited) for v in obj}
         elif hasattr(obj, "__dict__"):
             cls_name = obj.__class__.__name__
             attrs = {
-                k: serialize(v)
+                k: serialize(v, visited)
                 for k, v in vars(obj).items()
-                if k not in {"output_type", "postProcessing"}
+                if k not in {"output_type", "postProcessing"} and not k.startswith("_")
             }
-            return {"__class__": cls_name, **attrs}
+            result = {"__class__": cls_name, **attrs}
         else:
-            return obj  # str, int, float, None, bool etc.
+            try:
+                result = str(obj)
+            except Exception:
+                result = None
+        return result
 
-    return serialize(data)
+    return serialize(data, set())
 
 
 def remove_fields(data):
