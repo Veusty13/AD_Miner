@@ -5,6 +5,7 @@ import json
 import math
 import re
 from fastapi import HTTPException
+from typing import Optional
 
 ALL_CONTROLS_INFO_JSON = "agent/llm_assets/all_controls_info.json"
 ALL_REQUESTS_RESULTS_JSON = "agent/llm_assets/requests_results.json"
@@ -62,6 +63,18 @@ class LLMTask(Enum):
     methodology = "methodology"
     diagnose = "diagnose"
     remediation = "remediation"
+    sanitize = "sanitize"
+
+
+class PromptRequestModel(BaseModel):
+    control_title: str
+    source_folder: Optional[str] = None
+    destination_folder: Optional[str] = None
+
+
+class UnzipRequest(BaseModel):
+    source_folder: str
+    destination_folder: str
 
 
 PROMPT_TEMPLATES = {
@@ -120,6 +133,39 @@ Ta tâche :
 
 Le style doit être clair, pragmatique, et directement applicable en entreprise.
 """,
+
+    LLMTask.sanitize: """
+Tu trouveras en pièces jointes des extractions SharpHound d’une infrastructure Active Directory.
+
+📄 Informations disponibles :
+- Le code source d’un contrôle de sécurité Active Directory
+- Les résultats Cypher associés à ce contrôle :
+
+{control_info}
+
+{requests_results}
+
+🎯 Objectif :
+Analyser les fichiers situés dans `{source_folder}` pour identifier et corriger les vulnérabilités décrites dans le contrôle. Ces vulnérabilités sont mises en évidence dans les résultats Cypher.
+
+⚠️ Contraintes strictes :
+- Ne modifie **que** les fichiers contenant des données vulnérables.
+- Conserve strictement les noms de fichiers d’origine.
+- N’utilise **que** les répertoires `{source_folder}` pour la lecture et `{destination_folder}` pour l’écriture.
+- Ne pose **aucune question**.
+- Analyse directement le contenu des fichiers `.zip` ou JSON dans `{source_folder}` pour détecter les données à corriger.
+- Implémente les remédiations **en Python**, sous forme de transformations de données.
+
+📦 Sortie attendue :
+Un **script Python autonome**, prêt à être exécuté via `exec()`, qui :
+1. Charge tous les fichiers du dossier `{source_folder}`.
+2. Modifie uniquement ceux contenant des données vulnérables identifiées à partir des résultats Cypher.
+3. Copie tous les autres fichiers sans modification.
+4. Sauvegarde l’ensemble (modifié ou non) dans `{destination_folder}`, en conservant exactement les noms de fichiers d’origine.
+5. Ne contient **pas** de bloc `if __name__ == "__main__"`.
+
+🛑 La seule sortie que tu dois produire est ce script Python, sans commentaire ni texte supplémentaire.
+"""
 }
 
 
@@ -247,6 +293,8 @@ def generate_llm_prompt(
     task: LLMTask,
     control_info: dict,
     requests_results: List[dict[str, Any]],
+    source_folder: Optional[str] = None,
+    destination_folder: Optional[str] = None,
 ) -> str:
     template = PROMPT_TEMPLATES[task]
 
@@ -256,7 +304,10 @@ def generate_llm_prompt(
     prompt = template.format(
         control_info=ctrl_txt,
         requests_results=reqs_txt,
+        source_folder=source_folder or "{source_folder}",
+        destination_folder=destination_folder or "{destination_folder}",
     )
     prompt = clean(re.sub(r"<[^>]+>", "", prompt))
 
     return prompt.strip()
+
