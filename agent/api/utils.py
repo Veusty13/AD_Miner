@@ -72,7 +72,7 @@ class PromptRequestModel(BaseModel):
     destination_folder: Optional[str] = None
 
 
-class UnzipRequest(BaseModel):
+class FolderRequest(BaseModel):
     source_folder: str
     destination_folder: str
 
@@ -133,7 +133,6 @@ Ta tâche :
 
 Le style doit être clair, pragmatique, et directement applicable en entreprise.
 """,
-
     LLMTask.sanitize: """
 Tu trouveras en pièces jointes des extractions SharpHound d’une infrastructure Active Directory.
 
@@ -165,7 +164,7 @@ Un **script Python autonome**, prêt à être exécuté via `exec()`, qui :
 5. Ne contient **pas** de bloc `if __name__ == "__main__"`.
 
 🛑 La seule sortie que tu dois produire est ce script Python, sans commentaire ni texte supplémentaire.
-"""
+""",
 }
 
 
@@ -310,4 +309,3 @@ def generate_llm_prompt(
     prompt = clean(re.sub(r"<[^>]+>", "", prompt))
 
     return prompt.strip()
-

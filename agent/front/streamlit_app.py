@@ -18,11 +18,13 @@ API_BASE = "http://localhost:8000"
 SOURCE_DIR = "../bloodhound-automation/data/goadV2/"
 MODIFIED_DIR = "../bloodhound-automation/data/goadV2_1/"
 
+
 @st.cache_data(ttl=300)
 def fetch_json(url: str):
     resp = requests.get(url, timeout=30)
     resp.raise_for_status()
     return resp.json()
+
 
 def get_controls_by_category() -> Dict[str, List[Dict[str, str]]]:
     data = fetch_json(f"{API_BASE}/controls/information/list")
@@ -33,21 +35,26 @@ def get_controls_by_category() -> Dict[str, List[Dict[str, str]]]:
         grouped[cat].sort(key=lambda x: x["title"].lower())
     return dict(sorted(grouped.items()))
 
+
 def get_control_info(title: str) -> Dict[str, Any]:
     enc = requests.utils.quote(title, safe="")
     return fetch_json(f"{API_BASE}/controls/information/{enc}")
 
+
 def get_request_result(request_key: str) -> Dict[str, Any]:
     return fetch_json(f"{API_BASE}/controls/information/requests/{request_key}")
 
-def generate_prompt(task: str, title: str, source_folder: str, destination_folder: str) -> str:
+
+def generate_prompt(
+    task: str, title: str, source_folder: str, destination_folder: str
+) -> str:
     enc_task = requests.utils.quote(task, safe="")
     resp = requests.post(
         f"{API_BASE}/llm/prompt/{enc_task}",
         json={
             "control_title": title,
             "source_folder": source_folder,
-            "destination_folder": destination_folder
+            "destination_folder": destination_folder,
         },
         timeout=60,
         headers={"Content-Type": "application/json"},
@@ -55,9 +62,11 @@ def generate_prompt(task: str, title: str, source_folder: str, destination_folde
     resp.raise_for_status()
     return resp.text
 
+
 def get_file_diff(file1_path: pathlib.Path, file2_path: pathlib.Path) -> str:
-    with open(file1_path, "r", encoding="utf-8", errors="ignore") as f1, \
-         open(file2_path, "r", encoding="utf-8", errors="ignore") as f2:
+    with open(file1_path, "r", encoding="utf-8", errors="ignore") as f1, open(
+        file2_path, "r", encoding="utf-8", errors="ignore"
+    ) as f2:
         f1_lines = f1.readlines()
         f2_lines = f2.readlines()
 
@@ -66,32 +75,68 @@ def get_file_diff(file1_path: pathlib.Path, file2_path: pathlib.Path) -> str:
         f2_lines,
         fromfile=str(file1_path.name),
         tofile=str(file2_path.name),
-        lineterm=""
+        lineterm="",
     )
     return "".join(diff)
 
+
 def display_diffs(source_folder, destination_folder):
-    st.markdown("## 📝 Comparaison des fichiers")
+    st.markdown("## 📝 Comparaison des fichiers (hors .zip)")
 
-    source_files = {f.name: f for f in pathlib.Path(source_folder).glob("*") if f.is_file()}
-    dest_files = {f.name: f for f in pathlib.Path(destination_folder).glob("*") if f.is_file()}
+    source_files = {
+        f.name: f
+        for f in pathlib.Path(source_folder).glob("*")
+        if f.is_file() and not f.name.lower().endswith(".zip")
+    }
+    dest_files = {
+        f.name: f
+        for f in pathlib.Path(destination_folder).glob("*")
+        if f.is_file() and not f.name.lower().endswith(".zip")
+    }
 
-    common_files = set(source_files) & set(dest_files)
-    fichiers_modifiés = 0
+    all_files = sorted(set(source_files) | set(dest_files))
+    modified_files = []
+    identical_files = []
+    missing_in_dest = []
+    missing_in_source = []
 
-    if not common_files:
-        st.info("Aucun fichier en commun à comparer.")
-        return
+    for file_name in all_files:
+        f1 = source_files.get(file_name)
+        f2 = dest_files.get(file_name)
 
-    for file_name in sorted(common_files):
-        diff = get_file_diff(source_files[file_name], dest_files[file_name])
-        if diff:  # uniquement si un diff existe
-            fichiers_modifiés += 1
-            with st.expander(f"📄 Diff pour {file_name}"):
-                st.code(diff, language="diff")
+        if not f1:
+            missing_in_source.append(file_name)
+        elif not f2:
+            missing_in_dest.append(file_name)
+        else:
+            diff = get_file_diff(f1, f2)
+            if diff:
+                modified_files.append((file_name, diff))
+            else:
+                identical_files.append(file_name)
 
-    if fichiers_modifiés == 0:
-        st.success("✅ Tous les fichiers communs sont identiques.")
+    st.markdown("### 📊 Résumé")
+    st.write(f"✅ Identiques : {len(identical_files)}")
+    st.write(f"⚠️ Modifiés : {len(modified_files)}")
+    st.write(f"❌ Absents du dossier destination : {len(missing_in_dest)}")
+    st.write(f"❌ Absents du dossier source : {len(missing_in_source)}")
+
+    if modified_files:
+        st.markdown("### 🔍 Fichiers modifiés")
+        tabs = st.tabs([f for f, _ in modified_files])
+        for tab, (file_name, diff_text) in zip(tabs, modified_files):
+            with tab:
+                st.code(diff_text, language="diff")
+    else:
+        st.success("✅ Aucun fichier modifié.")
+
+    if missing_in_dest:
+        with st.expander("❌ Fichiers manquants dans le dossier destination"):
+            st.write(missing_in_dest)
+
+    if missing_in_source:
+        with st.expander("❌ Fichiers manquants dans le dossier source"):
+            st.write(missing_in_source)
 
 
 controls_by_cat = get_controls_by_category()
@@ -103,8 +148,12 @@ selected_control = st.sidebar.selectbox(
 
 st.sidebar.markdown("### 📂 Dossiers à utiliser")
 
-source_folder = st.sidebar.text_input("Chemin du dossier source", value="../bloodhound-automation/data/goadV2/")
-destination_folder = st.sidebar.text_input("Chemin du dossier destination", value="../bloodhound-automation/data/goadV2_1/")
+source_folder = st.sidebar.text_input(
+    "Chemin du dossier source", value="../bloodhound-automation/data/goadV2/"
+)
+destination_folder = st.sidebar.text_input(
+    "Chemin du dossier destination", value="../bloodhound-automation/data/goadV2_1/"
+)
 
 if st.sidebar.button("📦 Dézipper les archives ZIP"):
     try:
@@ -114,7 +163,7 @@ if st.sidebar.button("📦 Dézipper les archives ZIP"):
                 "source_folder": source_folder,
                 "destination_folder": destination_folder,
             },
-            timeout=30
+            timeout=30,
         )
         resp.raise_for_status()
         result = resp.json()
@@ -122,6 +171,21 @@ if st.sidebar.button("📦 Dézipper les archives ZIP"):
     except Exception as e:
         st.sidebar.error(f"Erreur : {e}")
 
+if st.sidebar.button("🧹 Nettoyer les dossiers"):
+    try:
+        resp = requests.post(
+            f"{API_BASE}/folders/clear",
+            json={
+                "source_folder": source_folder,
+                "destination_folder": destination_folder,
+            },
+            timeout=30,
+        )
+        resp.raise_for_status()
+        result = resp.json()
+        st.sidebar.success(result.get("message", "Dossiers nettoyés avec succès."))
+    except Exception as e:
+        st.sidebar.error(f"Erreur : {e}")
 
 if selected_control:
     try:
@@ -174,7 +238,7 @@ if selected_control:
             ("methodology", "🛠️ Méthodologie"),
             ("diagnose", "🔎 Diagnostic"),
             ("remediation", "💊 Remédiation"),
-            ("sanitize", "🧼 Assainir")
+            ("sanitize", "🧼 Assainir"),
         ],
         format_func=lambda o: o[1],
         horizontal=True,
@@ -190,9 +254,7 @@ if selected_control:
             st.error(f"Erreur API : {e}")
 
 if st.session_state.prompt_generated:
-    st.text_area(
-        "Prompt généré :", value=st.session_state.prompt_generated, height=200
-    )
+    st.text_area("Prompt généré :", value=st.session_state.prompt_generated, height=200)
     try:
         enc = tiktoken.get_encoding("cl100k_base")
         prompt_tokens = len(enc.encode(st.session_state.prompt_generated))
@@ -214,19 +276,13 @@ code = st_ace(
     show_gutter=True,
     show_print_margin=False,
     wrap=True,
-    auto_update=True
+    auto_update=True,
 )
 
 if st.button("Exécuter le code"):
     with st.expander("Résultat de l'exécution"):
         try:
-            resp = requests.post(
-                f"{API_BASE}/llm/code/execute",
-                json={
-                    "code": code
-                },
-                timeout=30
-            )
+            resp = requests.post(f"{API_BASE}/llm/code/execute", json=code, timeout=30)
             resp.raise_for_status()
             data = resp.json()
             st.code(data.get("stdout", ""), language="text")
