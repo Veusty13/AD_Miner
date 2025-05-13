@@ -74,7 +74,7 @@ class PromptRequestModel(BaseModel):
 
 class FolderRequest(BaseModel):
     source_folder: str
-    destination_folder: str
+    destination_folder: Optional[str] = None
 
 
 PROMPT_TEMPLATES = {
@@ -134,36 +134,56 @@ Ta tâche :
 Le style doit être clair, pragmatique, et directement applicable en entreprise.
 """,
     LLMTask.sanitize: """
-Tu trouveras en pièces jointes des extractions SharpHound d’une infrastructure Active Directory.
+Tu disposes de 3 éléments de contexte :
 
-📄 Informations disponibles :
-- Le code source d’un contrôle de sécurité Active Directory
-- Les résultats Cypher associés à ce contrôle :
+- Une pièce jointe contenant une extraction SharpHound issue d’une infrastructure Active Directory auditée avec AD Miner.
+- Le code source du contrôle de sécurité ciblé.
+- Les résultats des requêtes Cypher utilisées par ce contrôle.
 
+Contrôle à traiter :
 {control_info}
 
+Résultats Cypher :
 {requests_results}
 
-🎯 Objectif :
-Analyser les fichiers situés dans `{source_folder}` pour identifier et corriger les vulnérabilités décrites dans le contrôle. Ces vulnérabilités sont mises en évidence dans les résultats Cypher.
+Objectif :
+Analyser les résultats, identifier les failles mises en évidence par le contrôle, et générer un script Python qui applique les modifications correctives nécessaires.
 
-⚠️ Contraintes strictes :
-- Ne modifie **que** les fichiers contenant des données vulnérables.
-- Conserve strictement les noms de fichiers d’origine.
-- N’utilise **que** les répertoires `{source_folder}` pour la lecture et `{destination_folder}` pour l’écriture.
-- Ne pose **aucune question**.
-- Analyse directement le contenu des fichiers `.zip` ou JSON dans `{source_folder}` pour détecter les données à corriger.
-- Implémente les remédiations **en Python**, sous forme de transformations de données.
+Sortie attendue :
+Un script Python exécutable tel quel (via `exec()`), qui :
+1. Charge le ou les fichiers depuis `{source_folder}`.
+2. Applique les remédiations appropriées, basées sur l'analyse des résultats.
+3. Sauvegarde les fichiers modifiés (ou non) dans `{destination_folder}`, en conservant exactement le nom du fichier d'origine.
+4. Ne contient aucun bloc `if __name__ == "__main__"`.
 
-📦 Sortie attendue :
-Un **script Python autonome**, prêt à être exécuté via `exec()`, qui :
-1. Charge tous les fichiers du dossier `{source_folder}`.
-2. Modifie uniquement ceux contenant des données vulnérables identifiées à partir des résultats Cypher.
-3. Copie tous les autres fichiers sans modification.
-4. Sauvegarde l’ensemble (modifié ou non) dans `{destination_folder}`, en conservant exactement les noms de fichiers d’origine.
-5. Ne contient **pas** de bloc `if __name__ == "__main__"`.
+Contraintes strictes :
+- Ne modifier que le fichier contenu dans `{source_folder}`.
+- Le nom du fichier que tu dois modifier est le même que celui de la pièce jointe que je te fournis
+- Conserver strictement son format (indentation, structure, encodage).
+- Lire uniquement dans `{source_folder}`, écrire uniquement dans `{destination_folder}`.
+- Ne poser aucune question et ne produire aucun commentaire.
+- Se baser exclusivement sur les contenus du fichier source et des résultats Cypher.
+- Implémenter les remédiations en Python pur, sous forme de transformations de données.
 
-🛑 La seule sortie que tu dois produire est ce script Python, sans commentaire ni texte supplémentaire.
+Structure obligatoire du script :
+
+Le code doit commencer par :
+input_dir = "../bloodhound-automation/data/goadV2/"
+output_dir = "../bloodhound-automation/data/goadV2_1/"
+os.makedirs(output_dir, exist_ok=True)
+input_path = os.path.join(input_dir, xxx)
+output_path = os.path.join(output_dir, xxx)
+
+où xxx est le nom exact du fichier joint.
+
+Le script peut comporter des imports en amont de ce bloc.
+
+Et il doit se terminer par :
+
+with open(output_path, "w", encoding="utf-8") as f:
+    json.dump(data, f, indent=2, ensure_ascii=False)
+
+La seule sortie autorisée est le script Python complet, sans aucune explication ni annotation supplémentaire.
 """,
 }
 
@@ -309,3 +329,12 @@ def generate_llm_prompt(
     prompt = clean(re.sub(r"<[^>]+>", "", prompt))
 
     return prompt.strip()
+
+
+def extract_parts(filename: str):
+    parts = filename.split("_", 1)
+    if len(parts) == 2:
+        prefix, rest = parts
+        rest = rest.rsplit('.', 1)[0]
+        return prefix, rest
+    return None, None

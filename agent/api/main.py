@@ -4,7 +4,7 @@ import io
 import json
 import shutil
 import sys
-from typing import List, Annotated
+from typing import List, Annotated, Dict, Union
 from fastapi.responses import JSONResponse
 import zipfile
 from utils import (
@@ -19,6 +19,7 @@ from utils import (
     read_single_control_info,
     read_single_request_result,
     generate_llm_prompt,
+    extract_parts
 )
 import os
 import pathlib
@@ -195,3 +196,61 @@ def clear_folders(request: FolderRequest):
         "status": "OK",
         "message": "Dossiers nettoyés sauf .zip dans le dossier source",
     }
+
+
+@app.post("/folders/concat")
+def concat_json(request: FolderRequest):
+    print("hello")
+    folder_path = pathlib.Path(request.source_folder)
+    if not folder_path.exists() or not folder_path.is_dir():
+        return {"error": "Le dossier n'existe pas"}
+
+    json_files = list(folder_path.glob("*.json"))
+    if not json_files:
+        return {"error": "Aucun fichier JSON trouvé dans le dossier"}
+
+    combined_data: Dict[str, Union[dict, list]] = {}
+    prefixes = set()
+    suffixes = set()
+
+    for file in json_files:
+        prefix, suffix = extract_parts(file.name)
+        if not prefix or not suffix:
+            continue
+
+        prefixes.add(prefix)
+        suffixes.add(suffix)
+
+        try:
+            with open(file, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                file_stem = file.stem
+                combined_data[file_stem] = data
+        except json.JSONDecodeError:
+            continue
+
+    if not combined_data:
+        return {"error": "Les fichiers JSON sont vides ou invalides"}
+
+    sorted_prefixes = sorted(prefixes)
+    if len(suffixes) == 1:
+        suffix = list(suffixes)[0]
+    else:
+        suffix_parts = [s.split("_") for s in suffixes]
+        min_len = min(len(parts) for parts in suffix_parts)
+        common_suffix = []
+        for i in range(min_len):
+            ith_parts = [parts[i] for parts in suffix_parts]
+            if all(p == ith_parts[0] for p in ith_parts):
+                common_suffix.append(ith_parts[0])
+            else:
+                break
+        suffix = "_".join(common_suffix) if common_suffix else "concat"
+
+    output_filename = f"{'_'.join(sorted_prefixes)}_{suffix}_all_entities.json"
+    output_path = folder_path / output_filename
+
+    with open(output_path, "w", encoding="utf-8") as f:
+        json.dump(combined_data, f, ensure_ascii=False, indent=2)
+
+    return {"message": f"Fichier concaténé créé : {output_filename}"}

@@ -81,18 +81,17 @@ def get_file_diff(file1_path: pathlib.Path, file2_path: pathlib.Path) -> str:
 
 
 def display_diffs(source_folder, destination_folder):
-    st.markdown("## 📝 Comparaison des fichiers (hors .zip)")
+    st.markdown("## 📝 Comparaison des fichiers `.json` contenant `concat`")
 
-    source_files = {
-        f.name: f
-        for f in pathlib.Path(source_folder).glob("*")
-        if f.is_file() and not f.name.lower().endswith(".zip")
-    }
-    dest_files = {
-        f.name: f
-        for f in pathlib.Path(destination_folder).glob("*")
-        if f.is_file() and not f.name.lower().endswith(".zip")
-    }
+    def get_concat_json_files(folder_path):
+        return {
+            f.name: f
+            for f in pathlib.Path(folder_path).glob("*.json")
+            if f.is_file() and "concat" in f.name.lower()
+        }
+
+    source_files = get_concat_json_files(source_folder)
+    dest_files = get_concat_json_files(destination_folder)
 
     all_files = sorted(set(source_files) | set(dest_files))
     modified_files = []
@@ -186,6 +185,20 @@ if st.sidebar.button("🧹 Nettoyer les dossiers"):
         st.sidebar.success(result.get("message", "Dossiers nettoyés avec succès."))
     except Exception as e:
         st.sidebar.error(f"Erreur : {e}")
+
+if st.sidebar.button("🧬 Concaténer les JSON"):
+    try:
+        resp = requests.post(
+            f"{API_BASE}/folders/concat",
+            json={"source_folder": source_folder},
+            timeout=30,
+        )
+        resp.raise_for_status()
+        result = resp.json()
+        st.sidebar.success(result.get("message", "Fichiers concaténés avec succès."))
+    except Exception as e:
+        st.sidebar.error(f"Erreur lors de la concaténation : {e}")
+
 
 if selected_control:
     try:
