@@ -64,6 +64,7 @@ class LLMTask(Enum):
     diagnose = "diagnose"
     remediation = "remediation"
     sanitize = "sanitize"
+    free = "free"
 
 
 class PromptRequestModel(BaseModel):
@@ -184,6 +185,10 @@ with open(output_path, "w", encoding="utf-8") as f:
     json.dump(data, f, indent=2, ensure_ascii=False)
 
 La seule sortie autorisée est le script Python complet, sans aucune explication ni annotation supplémentaire.
+""",
+    LLMTask.free: """
+Résultats Cypher :
+{requests_results}
 """,
 }
 

@@ -252,6 +252,7 @@ if selected_control:
             ("diagnose", "🔎 Diagnostic"),
             ("remediation", "💊 Remédiation"),
             ("sanitize", "🧼 Assainir"),
+            ("free", "🕊️ Mode Libre"),
         ],
         format_func=lambda o: o[1],
         horizontal=True,
